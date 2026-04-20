@@ -9,7 +9,6 @@ import 'dotenv/config'
  * Requires: ANTHROPIC_API_KEY environment variable
  * Output: runs/{runId}/*.json
  */
-console.log("KEY:", process.env.ANTHROPIC_API_KEY);
 import { initializeRun } from './workflows/initializeRun';
 import { planSources } from './workflows/planSources';
 import { extractEvidence } from './workflows/extractEvidence';
