@@ -6,7 +6,7 @@
       "dom"
     ],
     "module": "CommonJS",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "strict": true,
     "skipLibCheck": true,
