@@ -5,7 +5,7 @@
       "ES2022",
       "dom"
     ],
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "preserve",
     "strict": true,
