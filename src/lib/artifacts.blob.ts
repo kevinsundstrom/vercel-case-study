@@ -6,7 +6,7 @@ export async function saveArtifactToBlob(runId: string, name: string, data: unkn
   const blob = await put(
     `${RUNS_PREFIX}/${runId}/${name}.json`,
     JSON.stringify(data, null, 2),
-    { access: 'public', contentType: 'application/json', addRandomSuffix: false }
+    { access: 'private', contentType: 'application/json', addRandomSuffix: false }
   );
   return blob.url;
 }
@@ -15,7 +15,7 @@ export async function saveMarkdownFileToBlob(runId: string, name: string, markdo
   const blob = await put(
     `${RUNS_PREFIX}/${runId}/${name}.md`,
     markdown,
-    { access: 'public', contentType: 'text/markdown; charset=utf-8', addRandomSuffix: false }
+    { access: 'private', contentType: 'text/markdown; charset=utf-8', addRandomSuffix: false }
   );
   return blob.url;
 }
