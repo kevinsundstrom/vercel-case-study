@@ -1,12 +1,12 @@
 import Anthropic from '@anthropic-ai/sdk';
 
-const MODEL = 'claude-sonnet-4-6';
+const MODEL = 'claude-haiku-4-5';
+const MAX_SEARCHES = 6;
 
-const SYSTEM = `You are a research assistant. Given a content outline, search the web to find comprehensive, accurate, and up-to-date information for each section.
+const SYSTEM = `You are a research assistant. Given a content outline, search the web to find accurate, up-to-date information for each section.
 
-Search multiple times — once to understand the landscape, then for specific claims, comparisons, and technical details.
-Organize your final notes by section matching the outline. Be specific: include version numbers, pricing, API names, benchmark figures, and direct quotes where available.
-Vague notes produce vague articles.`;
+Be targeted: search for specific facts, version numbers, pricing, and benchmark figures. Do not search the same topic twice.
+When you have enough information, write detailed research notes organized by section. Be specific — vague notes produce vague articles.`;
 
 export async function research(outline: string): Promise<string> {
   const client = new Anthropic();
@@ -14,17 +14,23 @@ export async function research(outline: string): Promise<string> {
   const messages: Anthropic.MessageParam[] = [
     {
       role: 'user',
-      content: `Research this article outline thoroughly. Search for everything needed to write a comprehensive, accurate article.\n\nOUTLINE:\n\n${outline}\n\nWhen done searching, write detailed research notes organized by section.`,
+      content: `Research this article outline. Search for the facts needed to write a comprehensive, accurate article.\n\nOUTLINE:\n\n${outline}\n\nWhen done searching, write detailed research notes organized by section.`,
     },
   ];
 
-  // Tool use loop — Claude will search until it has enough information
+  let searches = 0;
+
   while (true) {
+    // Once we hit the search cap, force end_turn by removing the tool
+    const tools = searches < MAX_SEARCHES
+      ? [{ type: 'web_search_20250305', name: 'web_search' } as const]
+      : [];
+
     const response = await client.messages.create({
       model: MODEL,
-      max_tokens: 8096,
+      max_tokens: 4096,
       system: SYSTEM,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+      tools,
       messages,
     });
 
@@ -39,5 +45,6 @@ export async function research(outline: string): Promise<string> {
     // web_search_20250305 is server-side: Anthropic executes the search and
     // returns results as web_search_tool_result blocks in response.content.
     // No tool_result message needed — just loop back with the assistant turn.
+    searches++;
   }
 }
