@@ -31,19 +31,11 @@ export default async function ArticlePage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
-      {/* Nav */}
-      <nav className="sticky top-0 z-10 border-b border-[#1a1a1a] bg-[#0a0a0a]/90 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-5xl items-center px-6">
-          <svg height="20" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vercel">
-            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="white" />
-          </svg>
-          <span className="ml-4 text-sm text-[#666]">Blog</span>
-        </div>
-      </nav>
-
-      <main className="mx-auto max-w-[680px] px-6 pb-32 pt-16">
+      <main className="mx-auto max-w-[680px] px-6 pb-32 pt-20">
         {/* Byline */}
         <div className="mb-8 flex items-center gap-2 text-[13px] text-[#666]">
+          <span>Kevin Sundstrom</span>
+          <span>·</span>
           <span>April 21, 2026</span>
           <span>·</span>
           <span>8 min read</span>
@@ -75,5 +67,6 @@ export default async function ArticlePage() {
         />
       </main>
     </div>
+
   );
 }
