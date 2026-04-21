@@ -1,5 +1,5 @@
 const OWNER = 'kevinsundstrom';
-const REPO = 'content-pipeline';
+const REPO = 'vercel-case-study';
 const BRANCH = 'main';
 
 export async function commitDraftToRepo(runId: string, markdown: string): Promise<string> {

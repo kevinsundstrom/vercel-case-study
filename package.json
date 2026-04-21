@@ -1,5 +1,5 @@
 {
-  "name": "content-pipeline",
+  "name": "vercel-case-study",
   "version": "0.1.0",
   "private": true,
   "description": "Outline-driven content pipeline with research, writing, fact-checking, and linting",
