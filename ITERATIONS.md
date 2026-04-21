@@ -61,4 +61,60 @@
 - Closing reframes around the developer landscape, not vendor competition
 
 ### Run ID
-[To be filled after pipeline trigger]
+wrun_01KPRGXWQGBK9TY2N0VVJTCYTR — draft: drafts/run_60e780d58ab9.md
+
+---
+
+## Iteration 3 — transition to targeted refinement
+
+### Why we stopped running the full pipeline
+
+After two full pipeline runs, the piece reached a point where structure, voice, and argument were largely locked. Continuing to run the full pipeline introduced diminishing returns and risk: each full run could fix targeted issues while introducing unintended changes elsewhere. The remaining problems were sentence-level, not structural.
+
+### What we built instead
+
+A lightweight refinement agent that takes the current draft and a list of targeted feedback items, then returns a structured diff showing only the suggested changes. No researcher, no fact checker, no lint loop, no durable execution. A standard API route with a single LLM call.
+
+This change reflects a deliberate architectural decision: use the right tool for the job. Vercel Workflows is the right tool for a multi-step, long-running, recoverable content pipeline. A direct Anthropic SDK call is the right tool for a fast, targeted, single-pass refinement.
+
+### Review and approval process
+
+The refine endpoint returns a structured markdown diff. Each change is labeled with the target passage, the before text, the after text, and the reason for the change. Changes are reviewed and approved manually. Approved changes are applied directly to the draft file using surgical string replacement. Rejected changes are discarded. Nothing outside the targeted passages is touched.
+
+### Problems observed in iteration 2 draft
+
+1. **Broken sentence structure in "The execution model both engines share."** "This pattern, sometimes called replay-with-memoization, Temporal pioneered, and most code-first durable execution tools now use." Clause order makes it read as if Temporal pioneered the tools, not the pattern.
+
+2. **Missing word after Vercel code block.** "The orchestration the structure implies, not declared explicitly." Missing verb. Should read as "The orchestration is implied by the structure" or similar.
+
+3. **Worlds system still lands slightly abruptly.** "An adapter system called Worlds" is better than before but a developer still does not have enough context to know whether this is a new concept or something they should already know.
+
+4. **Weak closing sentence in "Where state lives."** "Neither is the wrong choice. They serve different priorities." Adds nothing the reader has not already concluded. Softens a section that was working without it.
+
+5. **"A tradeoff worth understanding" covers two distinct topics.** Step identity and system limitations are related but not the same tradeoff. The heading does not accurately represent the section's content.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Fix broken sentence in execution model section | Refine agent — targeted diff | Sentence-level fix, no structural change needed |
+| Fix missing word after Vercel code block | Refine agent — targeted diff | Single word omission |
+| Add half-sentence of context for Worlds system | Refine agent — targeted diff | Concept needs minimal grounding on first reference |
+| Remove weak closing sentence in Where state lives | Refine agent — targeted diff | Sentence adds no value |
+| Reconsider "A tradeoff worth understanding" heading | Refine agent — targeted diff | Heading does not reflect section content |
+
+### Anticipated improvement
+
+- Prose is clean and structurally correct throughout
+- No concept introduced without minimal context
+- Section headings accurately reflect content
+- No sentences that soften sections unnecessarily
+
+### Run ID
+[To be filled after refine endpoint call]
+
+### Approved changes
+[To be filled after diff review]
+
+### Rejected changes
+[To be filled after diff review]
