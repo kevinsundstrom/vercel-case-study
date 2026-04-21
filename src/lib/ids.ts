@@ -1,5 +1,3 @@
-import { randomBytes } from 'crypto';
-
 export function generateRunId(): string {
-  return `run_${randomBytes(6).toString('hex')}`;
+  return `run_${globalThis.crypto.randomUUID().replace(/-/g, '').slice(0, 12)}`;
 }
