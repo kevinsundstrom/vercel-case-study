@@ -21,7 +21,7 @@ async function getArticleHtml(): Promise<{ title: string; html: string }> {
     .process(withoutTitle);
 
   return {
-    title: 'Vercel vs Cloudflare Workflows: two mental models for AI agents',
+    title: 'Vercel Workflows vs Cloudflare Workflows: two mental models for AI agents',
     html: result.toString(),
   };
 }
