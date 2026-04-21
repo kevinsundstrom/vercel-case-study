@@ -36,16 +36,8 @@ export async function research(outline: string): Promise<string> {
       return textBlock.text;
     }
 
-    if (response.stop_reason === 'tool_use') {
-      const toolResults: Anthropic.ToolResultBlockParam[] = response.content
-        .filter(b => b.type === 'tool_use')
-        .map(b => ({
-          type: 'tool_result' as const,
-          tool_use_id: (b as Anthropic.ToolUseBlock).id,
-          content: '',
-        }));
-
-      messages.push({ role: 'user', content: toolResults });
-    }
+    // web_search_20250305 is server-side: Anthropic executes the search and
+    // returns results as web_search_tool_result blocks in response.content.
+    // No tool_result message needed — just loop back with the assistant turn.
   }
 }
