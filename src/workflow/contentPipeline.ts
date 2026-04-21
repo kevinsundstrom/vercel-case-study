@@ -5,7 +5,7 @@ import { write } from '../agents/writer';
 import { factCheck } from '../agents/factChecker';
 import { repair } from '../agents/repair';
 import { lint, formatReport } from '../lib/linter';
-import { saveMarkdownFileToBlob, saveArtifactToBlob } from '../lib/artifacts.blob';
+import { commitDraftToRepo } from '../lib/artifacts.github';
 import { generateRunId } from '../lib/ids';
 
 const MAX_REPAIR_ITERATIONS = 3;
@@ -41,13 +41,9 @@ async function stepRepair(draft: string, report: string): Promise<string> {
   return repair(draft, report);
 }
 
-async function stepSave(runId: string, draft: string, notes: string): Promise<string> {
+async function stepSave(runId: string, draft: string): Promise<string> {
   'use step';
-  const [draftUrl] = await Promise.all([
-    saveMarkdownFileToBlob(runId, 'articleDraft', draft),
-    saveArtifactToBlob(runId, 'researchNotes', { notes }),
-  ]);
-  return draftUrl;
+  return commitDraftToRepo(runId, draft);
 }
 
 export async function contentPipelineWorkflow({ outline }: PipelineParams): Promise<PipelineResult> {
@@ -70,6 +66,6 @@ export async function contentPipelineWorkflow({ outline }: PipelineParams): Prom
     lintIterations++;
   }
 
-  const draftUrl = await stepSave(runId, draft, notes);
+  const draftUrl = await stepSave(runId, draft);
   return { runId, draftUrl, lintIterations, clean };
 }
