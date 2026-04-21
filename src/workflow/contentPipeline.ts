@@ -31,9 +31,9 @@ async function stepWrite(outline: string, notes: string): Promise<string> {
   return write(outline, notes);
 }
 
-async function stepFactCheck(draft: string, notes: string): Promise<string> {
+async function stepFactCheck(draft: string, reference: string): Promise<string> {
   'use step';
-  return factCheck(draft, notes);
+  return factCheck(draft, reference);
 }
 
 async function stepRepair(draft: string, report: string): Promise<string> {
@@ -51,7 +51,7 @@ export async function contentPipelineWorkflow({ outline }: PipelineParams): Prom
 
   const notes = await stepResearch(outline);
   let draft = await stepWrite(outline, notes);
-  draft = await stepFactCheck(draft, notes);
+  draft = await stepFactCheck(draft, outline);
 
   let lintIterations = 0;
   let clean = false;

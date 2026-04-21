@@ -26,3 +26,26 @@
 - Do not make claims without evidence from the research notes.
 - Do not editorialize ("This is a great feature"). State facts, let the reader decide.
 - Do not use filler transitions ("In conclusion", "To summarize", "It's worth noting").
+
+## Vercel voice and style rules
+
+These rules are confirmed from primary source analysis and apply to all content produced for Vercel.
+
+### Always
+- Sentence case for all headings. No title case anywhere in body headings.
+- Oxford comma required in all lists of three or more items.
+- Specific numbers and data over vague quantifiers. If the source provides a number, use it. Never use "many," "most," "significant," "numerous," "various," or "several" as the sole evidence for a claim.
+
+### Never
+- Em dashes (— or –). Use a period or restructure the sentence.
+- Summary conclusions. Do not open a closing section or final paragraph with "Overall," "In conclusion," "In summary," or "To summarize."
+- Hype openings. Do not open with "We're excited to announce," "We are excited to announce," "Excited to share," "Thrilled to announce," or equivalent enthusiasm openers.
+- Banned words: delve, utilize, streamline, harness, robust. Flag any instance of these words as a violation.
+
+### Tone
+- Peer-to-peer. One developer talking to another. Not a press release, not a docs page.
+- Authoritative but not corporate. Confident without hedging.
+- No marketing superlatives. No "industry-leading," "best-in-class," "world-class," "cutting-edge."
+- Short paragraphs. Two to four sentences maximum.
+- Do not editorialize after code blocks. Let code speak for itself.
+- Final line of the piece lands a point. It does not restate or summarize.
