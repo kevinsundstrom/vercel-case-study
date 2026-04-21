@@ -1,6 +1,8 @@
 node_modules/
 .next/
+.swc/
 runs/
+app/.well-known/
 .env
 .env.local
 .env*.local
