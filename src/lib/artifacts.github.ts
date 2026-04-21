@@ -1,13 +1,13 @@
-const OWNER = 'kevinsundstrom';
-const REPO = 'vercel-case-study';
-const BRANCH = 'main';
-
 export async function commitDraftToRepo(runId: string, markdown: string): Promise<string> {
   const token = process.env.GITHUB_TOKEN;
+  const repo = process.env.GITHUB_REPO;
+  const branch = process.env.GITHUB_BRANCH ?? 'main';
+
   if (!token) throw new Error('GITHUB_TOKEN is not set');
+  if (!repo) throw new Error('GITHUB_REPO is not set (format: owner/repo)');
 
   const path = `drafts/${runId}.md`;
-  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
+  const url = `https://api.github.com/repos/${repo}/contents/${path}`;
 
   const response = await fetch(url, {
     method: 'PUT',
@@ -20,7 +20,7 @@ export async function commitDraftToRepo(runId: string, markdown: string): Promis
     body: JSON.stringify({
       message: `draft: add ${runId}`,
       content: Buffer.from(markdown).toString('base64'),
-      branch: BRANCH,
+      branch,
     }),
   });
 
