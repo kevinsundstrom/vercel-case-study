@@ -230,3 +230,31 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r3.md. Previous refinement preserved at drafts/run_60e780d58ab9-r2.md.
+
+---
+
+## Iteration 6 — tighten "Where each system gets harder"
+
+### Problem observed
+
+The section was the longest in the piece and followed the code-heavy "Where durability lives" section, creating a pacing problem. The bottom half covered Vercel's scaling constraints and Cloudflare's lock-in in seven sentences where four carry the same information cleanly. Specific redundancies: "Every replay-based architecture has scaling constraints" was throat-clearing before the actual point. The determinism constraint was spread across three sentences. The Cloudflare paragraph hedged with an architectural changes caveat that softened a point that should land cleanly.
+
+### What was preserved
+
+The step identity content in the top half was not touched. It is credibility-building and serves a distinct reader from the limits content below it. The key facts are all retained: the 2,000-event recommendation, the snapshot-based runtime roadmap, the determinism constraint, platform lock-in, and the startup latency observation.
+
+### Change made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Tighten Vercel and Cloudflare limits paragraphs | Direct str_replace | Remove redundancy and hedging without losing load-bearing information |
+
+### Anticipated improvement
+
+Pacing improves across the back half of the piece. The section still earns its length but no longer feels padded.
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r4.md. Previous refinement preserved at drafts/run_60e780d58ab9-r3.md.
