@@ -175,3 +175,58 @@ n/a — direct apply, no endpoint call
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r2.md. Previous refinement preserved at drafts/run_60e780d58ab9-r1.md.
+
+---
+
+## Iteration 5 — editorial polish and closing rewrite
+
+### Problems observed in iteration 4 draft
+
+1. **Title was generic.** Did not signal the architectural argument or the agent framing.
+
+2. **"Both" echo across adjacent sections.** Three uses in close proximity read as a compare-and-contrast template.
+
+3. **Vercel durability framing incomplete.** The compiler inference point was implicit. Made explicit without using Vercel's branded marketing vocabulary.
+
+4. **Worlds sentence was redundant.** "An adapter system called Worlds, a pluggable interface that lets you swap storage backends" repeated the same concept twice.
+
+5. **"On limits:" was a robotic LLM transition.** Replaced with a human editorial transition.
+
+6. **First/Second enumeration was mechanical.** Paragraph structure carries the argument. "The second question" orphan resolved by rephrasing to "The other consideration." Closing sentence "These are different convictions about where orchestration belongs in an application's architecture." restored — it was load-bearing and had been dropped from an earlier version of this change.
+
+7. **Closing was too soft.** Rewrote to match the sharpness of the opening. "The other does away with them entirely" replaced with "the other hides them inside the code" — cleaner pairing with the reins metaphor.
+
+8. **No links to primary sources.** Added Temporal link and verified Cloudflare game loop URL before including.
+
+### Changes not made and why
+
+- **"Lock-in" framing** — "platform lock-in" is accurate standard technical language. Proposed replacement was arguably harsher. Change dropped.
+- **"Framework-defined infrastructure" label** — Vercel's branded marketing term. Adding it would violate the style guide rule against attributing ideas to Vercel as a corporate voice. The mechanic was retained without the label.
+- **"Exact same" to "same"** — corrected before applying.
+- **"Makes the reins invisible"** — mixed metaphor; replaced with "hides them inside the code."
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Update title | Direct str_replace | Signals architectural argument and agent framing |
+| Fix "both" echo and add Temporal link | Direct str_replace | Breaks compare-and-contrast symmetry, adds primary source link |
+| Expand Vercel durability framing | Direct str_replace | Makes compiler inference explicit without marketing attribution |
+| Fix Worlds redundancy | Direct str_replace | Eliminates circular definition |
+| Fix "On limits:" transition | Direct str_replace | Human editorial transition |
+| Remove First/Second enumeration | Direct str_replace | Paragraph structure carries the argument, orphan resolved, closing sentence restored |
+| Rewrite closing | Direct str_replace | Matches opening sharpness, metaphor corrected |
+| Add Cloudflare game loop link | Direct str_replace | Verified URL, primary source for key concept |
+
+### Anticipated improvement
+
+- Title signals the piece immediately
+- Prose reads as editorial writing rather than LLM output
+- Closing matches the opening in sharpness
+- Two primary sources linked and verified
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r3.md. Previous refinement preserved at drafts/run_60e780d58ab9-r2.md.
