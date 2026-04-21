@@ -3,6 +3,7 @@
 import { research } from '../agents/researcher';
 import { write } from '../agents/writer';
 import { factCheck } from '../agents/factChecker';
+import { factRepair } from '../agents/factRepair';
 import { repair } from '../agents/repair';
 import { lint, formatReport } from '../lib/linter';
 import { commitDraftToRepo } from '../lib/artifacts.github';
@@ -36,6 +37,11 @@ async function stepFactCheck(draft: string, reference: string): Promise<string> 
   return factCheck(draft, reference);
 }
 
+async function stepFactRepair(annotatedDraft: string, reference: string): Promise<string> {
+  'use step';
+  return factRepair(annotatedDraft, reference);
+}
+
 async function stepRepair(draft: string, report: string): Promise<string> {
   'use step';
   return repair(draft, report);
@@ -52,6 +58,7 @@ export async function contentPipelineWorkflow({ outline }: PipelineParams): Prom
   const notes = await stepResearch(outline);
   let draft = await stepWrite(outline, notes);
   draft = await stepFactCheck(draft, outline);
+  draft = await stepFactRepair(draft, outline);
 
   let lintIterations = 0;
   let clean = false;
