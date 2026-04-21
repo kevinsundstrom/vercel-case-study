@@ -12,7 +12,6 @@ const MAX_REPAIR_ITERATIONS = 3;
 
 export interface PipelineParams {
   outline: string;
-  urls?: string[];
 }
 
 export interface PipelineResult {
@@ -22,9 +21,9 @@ export interface PipelineResult {
   clean: boolean;
 }
 
-async function stepResearch(outline: string, urls: string[]): Promise<string> {
+async function stepResearch(outline: string): Promise<string> {
   'use step';
-  return research(outline, urls);
+  return research(outline);
 }
 
 async function stepWrite(outline: string, notes: string): Promise<string> {
@@ -51,10 +50,10 @@ async function stepSave(runId: string, draft: string, notes: string): Promise<st
   return draftUrl;
 }
 
-export async function contentPipelineWorkflow({ outline, urls = [] }: PipelineParams): Promise<PipelineResult> {
+export async function contentPipelineWorkflow({ outline }: PipelineParams): Promise<PipelineResult> {
   const runId = generateRunId();
 
-  const notes = await stepResearch(outline, urls);
+  const notes = await stepResearch(outline);
   let draft = await stepWrite(outline, notes);
   draft = await stepFactCheck(draft, notes);
 
