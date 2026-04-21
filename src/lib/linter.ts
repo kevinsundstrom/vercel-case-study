@@ -109,6 +109,25 @@ export function lint(markdown: string): LintReport {
     }
   });
 
+  // Declare-winner after code block
+  const codeBlockEnds: number[] = [];
+  let inBlock = false;
+  lines.forEach((line, i) => {
+    if (line.trim().startsWith('```')) {
+      if (inBlock) codeBlockEnds.push(i + 1);
+      inBlock = !inBlock;
+    }
+  });
+  const declareWinnerPhrases = /\b(is better|is the right choice|wins|outperforms|is superior|is worse|is the wrong choice)\b/i;
+  codeBlockEnds.forEach(endLine => {
+    for (let j = endLine; j < Math.min(endLine + 3, lines.length); j++) {
+      const s = lines[j].trim();
+      if (s.length > 0 && !s.startsWith('```') && !s.startsWith('#') && declareWinnerPhrases.test(s)) {
+        violations.push({ line: j + 1, rule: 'style.declare-winner-after-code', message: 'Avoid declaring a winner immediately after a code block. Neutral observations are fine.', text: s.slice(0, 100) });
+      }
+    }
+  });
+
   return { violations, clean: violations.length === 0 };
 }
 

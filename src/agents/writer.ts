@@ -12,7 +12,9 @@ function getStyleGuide(): string {
 
 const SYSTEM = `You are a technical writer producing high-quality content for a developer audience.
 Write in markdown. Follow the outline structure exactly — do not add or remove sections.
-Be specific and concrete. Avoid filler phrases. Let the research drive the content.`;
+Be specific and concrete. Avoid filler phrases. Let the research drive the content.
+Write only what drives the story forward. Cut anything that is implementation detail without comparative value. Prefer a shorter, sharper piece over a comprehensive one.
+Do not stuff sections with feature lists or implementation details. Every sentence should either advance the comparison or help the reader understand why something matters. If a sentence does neither, cut it.`;
 
 export async function write(outline: string, notes: string): Promise<string> {
   const styleGuide = getStyleGuide();

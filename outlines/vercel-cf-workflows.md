@@ -1,35 +1,38 @@
 # Vercel Workflows vs Cloudflare Workflows: how much platform do you need?
 
 ## Audience
-Full-stack TypeScript developers building long-running agentic systems. Know async/await, have heard of Temporal, may have used GitHub Actions for orchestration-adjacent tasks. Not Temporal experts. Evaluating Vercel or Cloudflare as their primary deployment platform.
+Full-stack TypeScript developers building or evaluating long-running agentic systems. They know async/await and have likely reached for GitHub Actions or a queue-based system when they needed to orchestrate multi-step work. They have heard of Temporal but may not have used it. They are not durable execution experts. They are trying to understand whether Vercel or Cloudflare fits how they already build.
 
 ## Goal
-Help developers understand the architectural difference between the two systems well enough to make an informed choice. Land Vercel as the favorable default for the application developer without being uncritical. Credibility is the mechanism, not enthusiasm.
+Help developers understand the architectural difference between the two systems well enough to make an informed choice. The piece should land Vercel as the favorable option for the default-case application developer, but through honest comparison rather than advocacy. Credibility is the mechanism.
 
 ## Length
-1,200 to 1,500 words. No more.
+Write only what drives the story forward. Cut implementation detail without comparative value. A sharp 1,000-word piece is better than a comprehensive 1,500-word one.
 
-## Hard constraints for the writer
+## Hard constraints
 - No em dashes. Use a period or restructure the sentence.
 - Oxford comma required in all lists.
 - No summary conclusions. Do not open the closing section with "Overall," "In conclusion," or "In summary."
 - No hype openings.
 - No banned words: delve, utilize, streamline, harness, robust.
-- Specific numbers over vague claims. If the outline provides a number, use it. Do not invent numbers not present in this outline.
 - Do not add technical claims not present in this outline.
-- Do not editorialize after code blocks.
-- Short paragraphs. Two to four sentences maximum.
-- Peer-to-peer tone. One developer talking to another.
+- Do not attribute ideas to Vercel as a corporate voice. State ideas directly.
+- Include one orienting sentence before each code block.
+- Do not declare a winner after code blocks. Neutral observations are fine.
+- Use plain language. Define any technical term briefly on first reference.
+- Every sentence must either advance the comparison or help the reader understand why something matters. Cut anything that does neither.
 
 ---
 
 ## Section 1: Opening
 
-Establish that the question has changed. Do not open with enthusiasm or a product announcement. Open in motion.
+Do not open with enthusiasm or a product announcement. Open in motion. Establish the problem before introducing either product.
 
-The old problem: durable execution required adopting a whole separate platform — a Temporal cluster, an Inngest organization, an AWS Step Functions state machine — on top of your application. That was the tax developers paid for reliability. Vercel and Cloudflare have both shipped durable execution as a native platform primitive. The calculus is shifting.
+For a long time, getting reliable execution for long-running work meant adding a second system to your stack. A dedicated orchestration service, a state machine layer, a background job framework running alongside the application you were actually trying to ship. That overhead, operational and cognitive, was the price of reliability.
 
-Close this section with this line or a close variant: "The difference isn't in how they recover execution. It's in where durability lives in your mental model."
+Both Vercel and Cloudflare have built durable execution into their platforms. Developers no longer have to leave their deployment environment to get it. But these two implementations are not the same, and the difference is not superficial.
+
+Close with: "The difference isn't in how they recover execution. It's in where durability lives in your mental model."
 
 ---
 
@@ -37,13 +40,13 @@ Close this section with this line or a close variant: "The difference isn't in h
 
 Heading: The execution model both engines share
 
-Both Vercel Workflows and Cloudflare Workflows use replay-with-memoization. This is the same execution model Temporal pioneered and the category consensus. When a workflow resumes after a pause or failure, the workflow function re-executes from the top. Completed step calls are short-circuited using cached outputs from a persistent store. Neither engine is novel at the execution-model layer. The differentiation is in packaging, language surface, and platform integration depth.
+Keep this section short. Its job is to establish shared ground before the comparison, not to teach durable execution.
 
-CRITICAL: Do not claim Vercel uses replay and Cloudflare uses checkpoints. Both use replay-with-memoization. This is confirmed from both companies' primary source documentation.
+Both engines use the same fundamental recovery mechanism. When a workflow resumes after a failure or a long wait, the workflow function re-executes from the top. Each step checks a persistent store — if that step already completed, its cached result is returned immediately and execution continues. If not, the step runs. This means the function is deterministic and the execution is recoverable without external coordination.
 
-Sources this section draws from:
-- vercel.com/blog/a-new-programming-model-for-durable-execution
-- blog.cloudflare.com/building-workflows-durable-execution-on-workers/
+This model, sometimes called replay-with-memoization, was pioneered by Temporal and is now the approach most code-first durable execution tools use. The point is not that it is novel. The point is that both Vercel and Cloudflare chose it, which means the execution model is not where they differ.
+
+Close with: "Where they differ is in how that model is expressed in code, and where the state that makes it work actually lives."
 
 ---
 
@@ -51,15 +54,12 @@ Sources this section draws from:
 
 Heading: Where durability lives
 
-This is the conceptual heart of the piece. Explain the real architectural difference in terms a developer will feel, not just understand.
+This is the conceptual heart of the piece. Explain the real architectural difference in terms a developer will feel, not just understand. Do not attribute ideas to Vercel as a corporate voice. State the ideas directly.
 
-Vercel's thesis, stated in their GA post: your code is the orchestrator. Durability is applied via two directives — "use workflow" on the function, "use step" on each unit of work. No separate orchestration service. No new class to extend. No YAML. Quote to use: "At first glance, this looks like one function calling another, and that is exactly the point."
+The insight behind Vercel Workflows is that durability should be a property of your functions, not a system you integrate with. You add two directives to ordinary async TypeScript. The first marks the function that orchestrates the work. The second marks each function that performs a step. The runtime handles the rest: persisting state, managing retries, resuming after failures. The code reads like normal async logic because it is normal async logic. The directives tell the runtime where the boundaries are.
 
-Cloudflare's model: every workflow instance is an Engine Durable Object backed by SQLite. The user's run(event, step) method is driven by the Engine via JavaScript RPC. Step names supplied by the developer act as the cache key. Quote to use: "What if we could model the engine as a game loop?"
+Before the Vercel code block, write one sentence telling the reader what they are about to see: that this is what a two-step workflow looks like in Vercel using only directives.
 
-Include this code block exactly as written. Do not editorialize after it.
-
-Vercel:
 ```typescript
 async function createSite(params: Params) {
   "use workflow";
@@ -79,7 +79,12 @@ async function deploySite(repo: Repo) {
 }
 ```
 
-Cloudflare:
+After the code block, one neutral observation is fine. Note that the orchestration is implied by the structure, not declared explicitly.
+
+Cloudflare's approach starts from a different premise. Durability is a property of a stateful primitive called a Durable Object — a compute unit that persists its own state in a co-located SQLite database. Every workflow instance is one of these objects. The workflow's `run` method is called by an internal engine, and each step is an explicit named operation whose result is stored and retrieved by name. Cloudflare's engineers described their design as a game loop: a function that keeps re-running until every named step has completed and its result is cached.
+
+Before the Cloudflare code block, write one sentence telling the reader what they are about to see: that this is the same two-step workflow in Cloudflare, where steps are named explicitly and the workflow is a class.
+
 ```typescript
 export class MySiteWorkflow extends WorkflowEntrypoint<Env, Params> {
   async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
@@ -94,70 +99,62 @@ export class MySiteWorkflow extends WorkflowEntrypoint<Env, Params> {
 }
 ```
 
----
-
-## Section 4: Storage topology and portability
-
-Heading: Storage topology and portability
-
-Vercel persists state to a managed event log. The storage layer is abstracted via the Worlds system — an adapter pattern that makes the event log pluggable. Ships with a Managed World (Vercel infrastructure), a Local World for development, and a Postgres reference implementation for self-hosting. Community Worlds include Redis, Turso, MongoDB, Jazz Cloud, and Cloudflare's own storage primitives. The SDK is open source. It runs on any platform.
-
-Cloudflare persists state to a SQLite database co-located inside each workflow's Engine Durable Object. State and compute are pinned together at the edge across 330+ Cloudflare cities. Tight integration with D1, R2, Queues, and the Agents SDK. No self-hosted path. Running Cloudflare Workflows means running on Cloudflare.
-
-Do not frame the Cloudflare model as wrong. Edge-local state has real advantages for latency-sensitive workloads. Present the tradeoff, not a verdict.
+After the code block, one neutral observation is fine. Note that the step names are explicit strings supplied by the developer, not inferred by the runtime.
 
 ---
 
-## Section 5: Implicit vs explicit step identity
+## Section 4: Where state lives
 
-Heading: Implicit vs explicit step identity
+Heading: Where state lives
 
-In October 2025, Inngest published a direct response to Vercel's Workflow SDK launch arguing that implicit step identification creates a production stability risk. Their argument: when developers update their code, running workflows can break if step identity is tied to position rather than an explicit name. Their own experience: it looked cleaner in demos, then users deployed to production and updated their code.
+Keep this section tight. Cut anything that is implementation detail without comparative value. The insight is portability, not the feature list.
 
-Vercel's architectural answer: the compiler generates stable step IDs from the function's filepath and function name, not its position in the call stack. Atomic versioning in the World ensures in-flight runs finish on the deployment they started. Deploy skew protection pegs each run to a specific deployment version.
+Vercel stores workflow state in a managed event log. The storage layer is designed to be swappable through an adapter system called Worlds. Out of the box you get Vercel's managed infrastructure. A Postgres reference implementation exists for self-hosting. The SDK is open source. The workflow runtime is not tied to Vercel's platform.
 
-This is a live debate. The stability of implicit step IDs across real-world code changes — renamed files, moved functions, refactored modules — is something each team needs to evaluate. Do not declare a winner.
+Cloudflare stores workflow state in a SQLite database inside each workflow's Durable Object instance. State and compute are co-located at the edge. This is a real architectural advantage for latency-sensitive workloads where the workflow is close to the data it needs. It is also a platform commitment. There is no self-hosted path. Cloudflare Workflows runs on Cloudflare.
 
-Sources:
-- inngest.com/blog/explicit-apis-vs-magic-directives
-- useworkflow.dev/docs/how-it-works/understanding-directives
+Do not list all available World implementations. Do not frame the Cloudflare model as wrong. Present the tradeoff: portability vs edge-local state.
 
 ---
 
-## Section 6: Real limitations, not footnotes
+## Section 5: A tradeoff worth understanding
 
-Heading: Real limitations, not footnotes
+Heading: A tradeoff worth understanding
 
-This section must be genuinely honest. Soft-pedaling will be noticed by technical readers.
+This section covers the implicit vs explicit step identity debate and the limitations of each system. Keep it honest. This is where the piece builds credibility.
 
-Vercel: replay overhead grows as event histories lengthen. Vercel's own docs recommend splitting into child workflows once a run exceeds roughly 2,000 events. Workflows 5 plans a snapshot-based runtime to reduce replay cost as histories grow — this is on their public roadmap. Workflow functions must be fully deterministic: no Math.random(), no Date.now(), no I/O outside of steps. This is a category-wide constraint, not unique to Vercel, but it is a real programming model discipline.
+Vercel's directive approach raises a real question: what happens when you rename a file, move a function, or refactor a module while a workflow is still running? The compiler generates step IDs from the function's filepath and name, not its position in the call stack. Vercel's answer is that deploy skew protection pegs each run to the deployment it started on, and atomic versioning in the storage layer ensures in-flight runs complete before new versions take over. Whether that holds across all real-world refactor patterns is something each team needs to evaluate before committing.
 
-Cloudflare: runs only on Cloudflare — no portability path. A Hacker News thread from April 2026 documented startup delays of up to four minutes before workflow instances started under normal load, not only under stress. Cloudflare's V2 rearchitecture in April 2026 addressed scaling pressure from agent workloads, which indicates earlier limits were real constraints.
+Cloudflare's explicit step naming sidesteps this problem entirely. The developer supplies the cache key. Refactoring the surrounding code does not affect step identity as long as the string name stays the same. The tradeoff is that the developer is now responsible for naming discipline across the codebase.
 
-Sources:
-- Vercel docs on workflow limits
-- vercel.com/blog/a-new-programming-model-for-durable-execution (Workflows 5 roadmap section)
-- news.ycombinator.com/item?id=47334792
-- blog.cloudflare.com/workflows-v2/
+On limitations: Vercel's replay model accumulates overhead as event histories grow. Their docs recommend splitting into child workflows past roughly 2,000 events, and a future version plans to address this with a snapshot-based runtime. Workflow functions must be fully deterministic — no random values, no timestamps, no external calls outside of steps. This is a constraint shared across all tools in this space, but it requires active discipline.
 
----
+Cloudflare's primary constraint is platform lock-in. There is no path to self-host or run outside Cloudflare infrastructure. Some developers have reported meaningful startup latency before workflow instances initialize, particularly for workloads that trigger at machine speed rather than human speed. Cloudflare has addressed this with architectural changes to how workflow instances are managed, but it is worth testing against your own workload patterns before committing.
 
-## Section 7: Making the call
-
-Heading: Making the call
-
-Two short paragraphs. No feature matrix.
-
-Choose Vercel Workflows if your workflows are part of your application rather than a separate system, if you want durability to disappear into your existing TypeScript codebase, and if portability or self-hosting matters. It is also the stronger choice if you are building for or with coding agents — the directive model means an agent only has to reason about one system.
-
-Choose Cloudflare Workflows if you are committed to the Workers ecosystem and want workflow state co-located with your edge compute. The CPU-only billing model — where sleeps and waits are genuinely free — is a real advantage for long-running workflows that spend most of their time waiting rather than computing.
+Do not cite Hacker News or any forum as a source. Frame developer-reported issues as general observations, not documented facts from a specific thread.
 
 ---
 
-## Section 8: Closing
+## Section 6: How to think about the choice
 
-Do not summarize. Do not restate what the piece covered. Do not open with "Overall," "In conclusion," or "In summary." Land a final point that reframes everything that came before it.
+Heading: How to think about the choice
 
-The durable execution category has converged on a shared execution model. What Vercel and Cloudflare are competing on now is ergonomics and integration depth — how naturally durability fits into the way you already build. That is a different kind of competition than it used to be.
+Do not tell developers which system to choose. Instead, tie the threads of the comparison together and help them see the shape of the decision. The goal is to help them apply what they just read to their own context.
 
-Final line — use this exactly: "The question isn't which system is more powerful. It's how little infrastructure you want to think about to build something that runs forever."
+The comparison comes down to two questions. First: where does the workflow live relative to your application? If the workflow is part of the application — woven into the same codebase, triggered by the same events, sharing the same deployment — Vercel's model fits naturally. The directives disappear into the code and the runtime handles the rest. If the workflow is a system of its own, operating at the edge and tightly coupled to Cloudflare's data and compute primitives, Cloudflare's model gives you explicit control over something that warrants it.
+
+Second: how much platform are you willing to adopt? Vercel's open-source SDK and pluggable storage layer mean you can start on Vercel and move later. Cloudflare's model is deeply integrated with the Workers ecosystem. That integration is an advantage if you are already there. It is a constraint if you are not.
+
+Neither answer is wrong. The systems reflect different convictions about where orchestration belongs in an application's architecture.
+
+---
+
+## Section 7: Closing
+
+Heading: The landscape has shifted
+
+Do not summarize. Do not restate what the piece covered. Land a final point.
+
+Durable execution used to require adopting infrastructure that sat beside your application. Both Vercel and Cloudflare have moved it inside the platform itself, which changes the question developers are asking. It is no longer about which orchestration service to run. It is about which execution model matches the way you think about building software.
+
+Final line: "The question isn't which system is more powerful. It's which model fits the way you already build."

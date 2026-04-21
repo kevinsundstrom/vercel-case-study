@@ -47,5 +47,17 @@ These rules are confirmed from primary source analysis and apply to all content 
 - Authoritative but not corporate. Confident without hedging.
 - No marketing superlatives. No "industry-leading," "best-in-class," "world-class," "cutting-edge."
 - Short paragraphs. Two to four sentences maximum.
-- Do not editorialize after code blocks. Let code speak for itself.
+- Do not declare a winner after code blocks. A brief neutral observation to orient the reader is fine. Do not editorialize about which approach is better.
 - Final line of the piece lands a point. It does not restate or summarize.
+
+### Attribution and voice
+- Do not attribute ideas to Vercel as a corporate voice. Do not write "Vercel's thesis is..." or "As Vercel's GA post puts it..." or equivalent. State the idea directly and let it stand on its own. If a quote is used, introduce the idea first, then let the quote confirm or deepen it.
+- Do not write from a vendor perspective. Write as a developer explaining something to another developer. The reader should feel like they are getting a peer's assessment, not a company's pitch.
+
+### Terminology
+- Use plain language wherever an industry-standard term is not strictly necessary. If a technical term is introduced, define it briefly in context before using it. Do not assume the reader knows terms like "replay-with-memoization," "Durable Object," or "Worlds system" on first reference.
+- New product features or branded concepts must be introduced with one sentence of context before being used. Do not reference a named system or feature as though the reader already knows what it is.
+
+### Code blocks
+- Always include one orienting sentence before a code block. Tell the reader what they are about to see and why it matters. Do not write a tutorial. One sentence is enough.
+- After a code block, a brief observation that helps the reader understand what they just saw is acceptable. Do not declare a winner or editorialize about which approach is better. Observations should be neutral and descriptive.
