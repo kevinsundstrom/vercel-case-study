@@ -1,4 +1,4 @@
-# Content pipeline
+# Vercel case study
 
 This repo was built as a case study for a Content Engineer role at Vercel. The goal was to build a lightweight content pipeline and use it to produce an original piece comparing Vercel Workflows and Cloudflare Workflows as agent infrastructure.
 
