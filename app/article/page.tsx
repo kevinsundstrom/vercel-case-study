@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 async function getArticleHtml(): Promise<{ title: string; html: string }> {
-  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r3.md');
+  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r4.md');
   const raw = readFileSync(filePath, 'utf8');
 
   // Strip the h1 from the markdown — we render it separately
