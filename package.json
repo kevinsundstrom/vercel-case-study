@@ -2,15 +2,12 @@
   "name": "content-pipeline",
   "version": "0.1.0",
   "private": true,
-  "description": "Claim-governed content compiler for structured comparison articles",
+  "description": "Outline-driven content pipeline with research, writing, fact-checking, and linting",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "validate-fixtures": "tsx src/lib/validateFixtures.ts",
-    "pipeline": "tsx src/runner.ts",
-    "draft": "tsx src/runner.writeDraft.ts"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",

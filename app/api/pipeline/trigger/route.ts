@@ -5,14 +5,23 @@ import { contentPipelineWorkflow } from '../../../../src/workflow/contentPipelin
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
-  let topic: string | undefined;
+  let outline: string | undefined;
+  let urls: string[] | undefined;
+
   try {
     const body = await request.json();
-    if (typeof body?.topic === 'string' && body.topic.trim().length > 0) {
-      topic = body.topic.trim();
+    if (typeof body?.outline === 'string' && body.outline.trim().length > 0) {
+      outline = body.outline.trim();
     }
-  } catch { /* no body — use default */ }
+    if (Array.isArray(body?.urls)) {
+      urls = body.urls.filter((u: unknown) => typeof u === 'string');
+    }
+  } catch { /* no body — outline is required */ }
 
-  const run = await start(contentPipelineWorkflow, [{ topic }]);
+  if (!outline) {
+    return NextResponse.json({ error: 'outline is required' }, { status: 400 });
+  }
+
+  const run = await start(contentPipelineWorkflow, [{ outline, urls }]);
   return NextResponse.json({ runId: run.runId }, { status: 202 });
 }

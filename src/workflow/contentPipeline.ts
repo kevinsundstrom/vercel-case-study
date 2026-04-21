@@ -1,97 +1,76 @@
 'use workflow';
 
-import { initializeRun } from '../workflows/initializeRun';
-import { planSources } from '../workflows/planSources';
-import { extractEvidence } from '../workflows/extractEvidence';
-import { normalizeClaims } from '../workflows/normalizeClaims';
-import { writeDraft } from '../workflows/writeDraft';
-import { saveArtifactToBlob, saveMarkdownFileToBlob } from '../lib/artifacts.blob';
-import type { RunManifest, EvidencePack, ComparisonSchema, ArticleDraft } from '../types/artifacts';
-import type { SourcePlan } from '../types/sourcePlan';
-import type { ClaimLedger } from '../types/claims';
+import { research } from '../agents/researcher';
+import { write } from '../agents/writer';
+import { factCheck } from '../agents/factChecker';
+import { repair } from '../agents/repair';
+import { lint, formatReport } from '../lib/linter';
+import { saveMarkdownFileToBlob, saveArtifactToBlob } from '../lib/artifacts.blob';
+import { generateRunId } from '../lib/ids';
 
-const DEFAULT_CONFIG = {
-  maxRepairIterations: 3,
-  targetWordCount: 1500,
-  articleVersion: '1.0.0',
-};
+const MAX_REPAIR_ITERATIONS = 3;
 
 export interface PipelineParams {
-  topic?: string;
+  outline: string;
+  urls?: string[];
 }
 
 export interface PipelineResult {
   runId: string;
-  topic: string;
-  wordCount: number;
-  claimCount: number;
-  sourcedClaims: number;
-  derivedClaims: number;
   draftUrl: string;
+  lintIterations: number;
+  clean: boolean;
 }
 
-async function stepInitializeRun(topic: string): Promise<RunManifest> {
+async function stepResearch(outline: string, urls: string[]): Promise<string> {
   'use step';
-  const { manifest } = await initializeRun({ topic, config: DEFAULT_CONFIG });
-  return manifest;
+  return research(outline, urls);
 }
 
-async function stepPlanSources(manifest: RunManifest): Promise<{ manifest: RunManifest; sourcePlan: SourcePlan }> {
+async function stepWrite(outline: string, notes: string): Promise<string> {
   'use step';
-  return planSources({ manifest });
+  return write(outline, notes);
 }
 
-async function stepExtractEvidence(manifest: RunManifest, sourcePlan: SourcePlan): Promise<{ manifest: RunManifest; evidencePacks: EvidencePack[] }> {
+async function stepFactCheck(draft: string, notes: string): Promise<string> {
   'use step';
-  return extractEvidence({ manifest, sourcePlan });
+  return factCheck(draft, notes);
 }
 
-async function stepNormalizeClaims(manifest: RunManifest, evidencePacks: EvidencePack[]): Promise<{ manifest: RunManifest; claimLedger: ClaimLedger; comparisonSchema: ComparisonSchema }> {
+async function stepRepair(draft: string, report: string): Promise<string> {
   'use step';
-  return normalizeClaims({ manifest, evidencePacks });
+  return repair(draft, report);
 }
 
-async function stepWriteDraft(manifest: RunManifest, claimLedger: ClaimLedger, comparisonSchema: ComparisonSchema): Promise<{ manifest: RunManifest; draft: ArticleDraft }> {
+async function stepSave(runId: string, draft: string, notes: string): Promise<string> {
   'use step';
-  return writeDraft({ manifest, claimLedger, comparisonSchema });
-}
-
-async function stepSaveArtifacts(
-  manifest: RunManifest,
-  draft: ArticleDraft,
-  claimLedger: ClaimLedger,
-  comparisonSchema: ComparisonSchema,
-  sourcePlan: SourcePlan,
-): Promise<string> {
-  'use step';
-  const [, draftMdUrl] = await Promise.all([
-    saveArtifactToBlob(manifest.runId, 'manifest', { ...manifest, status: 'complete', currentStage: 'done' }),
-    saveMarkdownFileToBlob(manifest.runId, 'articleDraft', draft.markdown),
-    saveArtifactToBlob(manifest.runId, 'articleDraft', draft),
-    saveArtifactToBlob(manifest.runId, 'claimLedger', claimLedger),
-    saveArtifactToBlob(manifest.runId, 'comparisonSchema', comparisonSchema),
-    saveArtifactToBlob(manifest.runId, 'sourcePlan', sourcePlan),
+  const [draftUrl] = await Promise.all([
+    saveMarkdownFileToBlob(runId, 'articleDraft', draft),
+    saveArtifactToBlob(runId, 'researchNotes', { notes }),
   ]);
-  return draftMdUrl;
+  return draftUrl;
 }
 
-export async function contentPipelineWorkflow(params: PipelineParams): Promise<PipelineResult> {
-  const topic = params.topic ?? 'Vercel Workflows vs. Cloudflare Workflows';
+export async function contentPipelineWorkflow({ outline, urls = [] }: PipelineParams): Promise<PipelineResult> {
+  const runId = generateRunId();
 
-  const m1 = await stepInitializeRun(topic);
-  const { manifest: m2, sourcePlan } = await stepPlanSources(m1);
-  const { manifest: m3, evidencePacks } = await stepExtractEvidence(m2, sourcePlan);
-  const { manifest: m4, claimLedger, comparisonSchema } = await stepNormalizeClaims(m3, evidencePacks);
-  const { manifest: m5, draft } = await stepWriteDraft(m4, claimLedger, comparisonSchema);
-  const draftUrl = await stepSaveArtifacts(m5, draft, claimLedger, comparisonSchema, sourcePlan);
+  const notes = await stepResearch(outline, urls);
+  let draft = await stepWrite(outline, notes);
+  draft = await stepFactCheck(draft, notes);
 
-  return {
-    runId: m5.runId,
-    topic,
-    wordCount: draft.totalWordCount,
-    claimCount: claimLedger.claims.length,
-    sourcedClaims: claimLedger.claims.filter(c => c.type === 'sourced').length,
-    derivedClaims: claimLedger.claims.filter(c => c.type === 'derived').length,
-    draftUrl,
-  };
+  let lintIterations = 0;
+  let clean = false;
+
+  for (let i = 0; i < MAX_REPAIR_ITERATIONS; i++) {
+    const report = lint(draft);
+    if (report.clean) {
+      clean = true;
+      break;
+    }
+    draft = await stepRepair(draft, formatReport(report));
+    lintIterations++;
+  }
+
+  const draftUrl = await stepSave(runId, draft, notes);
+  return { runId, draftUrl, lintIterations, clean };
 }
