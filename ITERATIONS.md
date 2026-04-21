@@ -111,10 +111,17 @@ The refine endpoint returns a structured markdown diff. Each change is labeled w
 - No sentences that soften sections unnecessarily
 
 ### Run ID
-[To be filled after refine endpoint call]
+run_d6839d85d590 — draft: drafts/run_60e780d58ab9-r1.md
 
 ### Approved changes
-[To be filled after diff review]
+
+| Change | User adjustment | Applied |
+|---|---|---|
+| Fix broken sentence in execution model section | Reordered to active voice: "Temporal pioneered this pattern..." | Yes |
+| Fix missing word after Vercel code block | As suggested: "The orchestration is implied by the structure..." | Yes |
+| Add half-sentence of context for Worlds system | Added "a pluggable interface that lets you swap storage backends" (no em dash) | Yes |
+| Remove weak closing sentence in Where state lives | As suggested | Yes |
+| Reconsider "A tradeoff worth understanding" heading | User changed to "Where each system gets harder" | Yes |
 
 ### Rejected changes
-[To be filled after diff review]
+None — all 5 changes approved (2 with user-supplied wording adjustments).
