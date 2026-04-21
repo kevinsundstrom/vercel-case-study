@@ -50,20 +50,6 @@ drafts/                      — all draft outputs, versioned by run ID and refi
 ITERATIONS.md                — full iteration log: problems observed, changes made, reasoning
 ```
 
-## Running it yourself
-
-```bash
-python3 -c "
-import json
-outline = open('outlines/vercel-cf-workflows.md').read()
-print(json.dumps({'outline': outline}))
-" | curl -X POST https://[your-vercel-url]/api/pipeline/trigger \
-  -H "Content-Type: application/json" \
-  -d @-
-```
-
-Required: `ANTHROPIC_API_KEY`, `GITHUB_TOKEN` (write access to the repo), `GITHUB_REPO` in `owner/repo` format.
-
 ## A note on the pipeline running on Vercel Workflows
 
 The pipeline is built on the technology it writes about. Each stage is a named step that is cached and retryable. If a step fails, the workflow resumes from that step rather than starting over. The refine endpoint is a plain API route, not a workflow, because a single LLM call that completes in seconds does not need durable execution. The choice of tool reflects the architectural argument the article makes.
