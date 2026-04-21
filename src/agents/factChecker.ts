@@ -10,7 +10,7 @@ Your job is to read the draft and annotate any sentence that either:
 For each issue found, insert an inline annotation directly after the problematic sentence in this format:
 [FACT-CHECK: <explanation of the issue, noting what the reference document says or does not say>]
 
-Return the complete annotated draft with no preamble. If no issues are found, return the draft unchanged.`;
+Output the article markdown only — no preamble, no summary, no status message. If you find issues, insert [FACT-CHECK: ...] annotations inline. If you find no issues, output the article exactly as given. Never output anything other than the article markdown.`;
 
 export async function factCheck(draft: string, reference: string): Promise<string> {
   return llmCall(
