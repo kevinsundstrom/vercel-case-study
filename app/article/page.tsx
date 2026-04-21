@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import remarkHtml from 'remark-html';
 
 export const metadata = {
-  title: 'Vercel vs Cloudflare Workflows: two mental models for AI agents',
+  title: 'Vercel Workflows vs Cloudflare Workflows: two mental models for AI agents',
 };
 
 async function getArticleHtml(): Promise<{ title: string; html: string }> {
