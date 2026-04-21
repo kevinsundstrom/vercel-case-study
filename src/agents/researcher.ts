@@ -26,13 +26,24 @@ export async function research(outline: string): Promise<string> {
       ? [{ type: 'web_search_20250305', name: 'web_search' } as const]
       : [];
 
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: 4096,
-      system: SYSTEM,
-      tools,
-      messages,
-    });
+    let response: Anthropic.Message;
+    try {
+      response = await client.messages.create({
+        model: MODEL,
+        max_tokens: 4096,
+        system: SYSTEM,
+        tools,
+        messages,
+      });
+    } catch (err: unknown) {
+      // On rate limit, wait out the 1-minute window and retry the same call
+      const status = (err as { status?: number }).status;
+      if (status === 429) {
+        await new Promise(resolve => setTimeout(resolve, 62_000));
+        continue;
+      }
+      throw err;
+    }
 
     messages.push({ role: 'assistant', content: response.content });
 
