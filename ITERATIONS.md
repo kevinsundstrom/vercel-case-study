@@ -125,3 +125,53 @@ run_d6839d85d590 — draft: drafts/run_60e780d58ab9-r1.md
 
 ### Rejected changes
 None — all 5 changes approved (2 with user-supplied wording adjustments).
+
+---
+
+## Iteration 4 — agent-first pivot
+
+### Problems observed in iteration 3 draft
+
+1. **Opening framed the wrong stakes.** The piece opened around general long-running compute. Both Vercel and Cloudflare are positioning Workflows as their primary agent infrastructure primitive right now. The opening needed to reflect that.
+
+2. **Code examples used a site deployment workflow.** The createSite/createRepo/deploySite examples were technically correct but contextually dated. A research agent pattern is immediately relevant to what developers are building today.
+
+3. **"Where state lives" did not connect architecture to agent workloads.** Two targeted sentences — one per platform — make that connection explicit without restructuring the section.
+
+### Why the core structure was preserved
+
+The underlying architectural argument — Vercel's compiler-inferred state vs Cloudflare's explicit Durable Objects — is identical whether the workload is a site deployment or an agent pipeline. The structure was not rebuilt because it did not need to be.
+
+### Why changes were applied directly rather than through the refine endpoint
+
+The replacement text for every target was already written with precision. Running the refine endpoint would have added an LLM paraphrase step and a review round for changes that were already trusted. Direct application was the right tool.
+
+### Corrections applied before this pass
+
+- "Context windows warm" was imprecise. Replaced with "agents that read and write accumulated state frequently" which accurately describes what Cloudflare's co-location gives you.
+- Vercel replacement initially dropped the portability claim ("The workflow runtime is not tied to Vercel's platform"). That sentence is load-bearing and was preserved.
+- "First-class primitive" in the opening reframe was removed as marketing-y. Replaced with plain language.
+- "You are building a workflow that hopes nothing breaks" retained — strongest sentence in the draft.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Reframe opening around agent stakes | Direct str_replace | Establishes why this comparison matters to developers right now |
+| Swap Vercel code example to research agent | Direct str_replace | Same structure, immediately relevant context |
+| Swap Cloudflare code example to research agent | Direct str_replace | Same structure, immediately relevant context |
+| Fix Cloudflare agent sentence in Where state lives | Direct str_replace | Corrected technical imprecision before applying |
+| Add Vercel durable streams sentence | Direct str_replace | Maps Vercel storage model to agent streaming use case while preserving portability claim |
+
+### Anticipated improvement
+
+- Opening immediately signals relevance to developers building agents
+- Code examples reflect the actual workload both platforms are optimized for
+- Storage section connects architecture to agent use cases without technical imprecision
+- Core technical argument and structure fully preserved
+
+### Run ID
+n/a — direct apply, no endpoint call
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r2.md. Previous refinement preserved at drafts/run_60e780d58ab9-r1.md.
