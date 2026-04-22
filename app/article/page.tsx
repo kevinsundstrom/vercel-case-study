@@ -72,13 +72,15 @@ export default async function ArticlePage() {
           {TITLE}
         </h1>
 
-        {/* Byline */}
-        <div className="mb-10 flex items-center justify-center gap-2 text-[13px] text-[#666]">
+        {/* Author */}
+        <div className="mb-8 flex items-center justify-center text-[14px] font-medium text-[#ededed]">
           <span>Kevin Sundstrom</span>
-          <span>·</span>
-          <span>April 21, 2026</span>
-          <span>·</span>
+        </div>
+
+        {/* Meta row */}
+        <div className="mb-2 flex items-center justify-between border-t border-b border-[#1a1a1a] py-3 text-[13px] text-[#666]">
           <span>8 min read</span>
+          <span>April 21, 2026</span>
         </div>
 
         {/* Lede */}
