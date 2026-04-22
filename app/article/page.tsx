@@ -88,7 +88,7 @@ export default async function ArticlePage() {
           style={{ fontFeatureSettings: '"liga"', fontSynthesisWeight: 'none', WebkitFontSmoothing: 'antialiased', textRendering: 'optimizeLegibility' }}
           className="mb-0 font-[family-name:var(--font-geist-sans)] text-[24px] font-medium leading-[36px] tracking-[-0.96px] text-[rgb(161,161,161)] py-6"
         >
-          Every production agent needs durable execution. These two platforms put it in different places.
+          Production agents need durable execution. These two platforms put it in different places.
         </p>
 
         {/* Body */}
