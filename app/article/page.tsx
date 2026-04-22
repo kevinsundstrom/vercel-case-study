@@ -101,7 +101,7 @@ export default async function ArticlePage() {
         <article
           style={{ fontFeatureSettings: '"liga"', fontSynthesisWeight: 'none' }}
           className="
-            prose prose-invert max-w-none text-[18px]
+            mt-8 prose prose-invert max-w-none text-[18px]
             [&_p]:text-[#ededed] [&_p]:text-[18px] [&_p]:leading-[28px] [&_p]:mt-0
             [&_h2]:text-[#ededed] [&_h2]:text-[24px] [&_h2]:font-semibold [&_h2]:tracking-[-0.96px] [&_h2]:leading-[32px] [&_h2]:mt-12 [&_h2]:mb-4
             [&_h3]:text-[#ededed] [&_h3]:text-[20px] [&_h3]:font-semibold [&_h3]:tracking-[-0.6px] [&_h3]:leading-[28px] [&_h3]:mt-8 [&_h3]:mb-3
