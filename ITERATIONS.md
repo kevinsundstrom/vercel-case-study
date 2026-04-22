@@ -258,3 +258,39 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r4.md. Previous refinement preserved at drafts/run_60e780d58ab9-r3.md.
+
+---
+
+## Iteration 7 — tighten sections 2 and 3
+
+### Problems observed in iteration 6 draft
+
+1. **Section 2 heading was descriptive, not argumentative.** "The execution model both engines share" told the reader what the section covered but not what it meant. "Same recovery mechanism, different expression" carries the argument.
+
+2. **"Most code-first durable execution tools" was vague.** "The dominant approach in code-first durable execution" is more precise without overstating.
+
+3. **Replay mechanic description buried the key insight.** "This is not a full restart" needed to be stated explicitly — the replay pattern is counterintuitive and developers familiar with traditional restarts need that anchor before the step-caching explanation lands.
+
+4. **"Property of your functions" was imprecise.** The directive model is a language-level construct implemented by the compiler. "Language-level concept" is more accurate.
+
+5. **Minor grammatical imprecisions.** "Persists its own state" tightened to "persists state in its own." "An explicit named operation" corrected to "an explicitly named operation."
+
+6. **Redundant closing sentence in Vercel code block section.** "Nothing in the code announces itself as a workflow engine" repeated what "The orchestration is implied by the structure, not declared explicitly" already said more precisely.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Rename section 2 heading | Direct str_replace | Argumentative heading carries more weight |
+| "dominant approach" | Direct str_replace | More precise than "most tools use" |
+| Clarify replay mechanic | Direct str_replace | "This is not a full restart" anchors counterintuitive concept |
+| "language-level concept" | Direct str_replace | More accurate description of directive model |
+| "persists state in its own" | Direct str_replace | Grammatical tightening |
+| "explicitly named operation" | Direct str_replace | Grammatical correction |
+| Remove redundant sentence after Vercel code block | Direct str_replace | Covered by preceding sentence |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r5.md. Previous refinement preserved at drafts/run_60e780d58ab9-r4.md.
