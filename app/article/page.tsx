@@ -38,7 +38,7 @@ export default async function ArticlePage() {
         href="https://github.com/kevinsundstrom/vercel-case-study"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed left-6 top-5 text-[13px] text-[#444] transition-colors hover:text-[#888]"
+        className="fixed left-6 top-5 hidden text-[13px] text-[#444] transition-colors hover:text-[#888] md:block"
       >
         Repository
       </a>
