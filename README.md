@@ -4,7 +4,7 @@ This repo was built as a case study for a Content Engineer role at Vercel. The g
 
 ## The article
 
-[Live article](https://content-pipeline-git-main-kevinsundstroms-projects.vercel.app/article)
+[Live article](https://resilient-agents.vercel.app/article)
 
 The piece examines how Vercel and Cloudflare have each built durable execution into their platforms, why the two implementations differ at the architectural level, and what that means for developers building AI agents on top of them.
 
