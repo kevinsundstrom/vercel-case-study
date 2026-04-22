@@ -78,7 +78,7 @@ export default async function ArticlePage() {
         </div>
 
         {/* Meta row */}
-        <div className="mb-2 flex items-center justify-between border-t border-b border-[#1a1a1a] py-3 text-[13px] text-[#666]">
+        <div className="mb-2 flex items-center justify-between py-3 text-[13px] text-[#666]">
           <span>8 min read</span>
           <span>April 21, 2026</span>
         </div>
