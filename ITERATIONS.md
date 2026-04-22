@@ -473,3 +473,23 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r11.md. Previous refinement preserved at drafts/run_60e780d58ab9-r10.md.
+
+---
+
+## Iteration 14 — fix ambiguous closing sentence
+
+### Problem observed
+
+"Agents need durable execution to be invisible" was structurally ambiguous — it could be read as agents needing invisible durable execution, or agents needing durable execution in order to be invisible. "When building an agent, durable execution should be invisible" removes the ambiguity and makes a cleaner normative claim. "While building one" also dropped as redundant given the restructured opening.
+
+### Change made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Rewrite opening two sentences of closing body | Direct str_replace | Resolve ambiguity; prescriptive framing fits a closing argument |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r12.md. Previous refinement preserved at drafts/run_60e780d58ab9-r11.md.
