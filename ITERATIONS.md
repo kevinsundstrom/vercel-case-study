@@ -437,3 +437,39 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r10.md. Previous refinement preserved at drafts/run_60e780d58ab9-r9.md.
+
+---
+
+## Iteration 13 — rewrite "Design decisions" section
+
+### Problems observed in iteration 12 draft
+
+1. **Section heading was argumentative rather than descriptive.** "Design decisions with downstream consequences" made a claim. "Design decisions and trade-offs" names what the section actually does.
+
+2. **Vercel ID paragraph buried the principle.** Opening with the refactoring scenario before stating the underlying principle (code structure and execution state are linked) made the consequence harder to follow.
+
+3. **Deploy skew paragraph understated the observability impact.** The consequence for renamed steps in observability was present but awkwardly placed. Consolidated into the deploy skew paragraph where it belongs.
+
+4. **Cloudflare paragraph signaled superiority.** "Sidesteps this entirely" implied Cloudflare's approach was the better solution. Replaced with a neutral construction that leads directly to the tradeoff.
+
+5. **"Compiler won't catch a naming collision" was missing.** A concrete, practical consequence of Cloudflare's manual key approach that wasn't in the original.
+
+6. **Scaling paragraph always led with Vercel critiques.** Reversed paragraph order in the scaling section to balance critiques — Cloudflare first, Vercel second.
+
+7. **Determinism constraint preserved.** Was at risk of being dropped in the merged scaling paragraph. Kept at the end of the Vercel scaling discussion where it belongs.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Rename section heading | Direct str_replace | Descriptive not argumentative |
+| Rewrite Vercel ID paragraph | Direct str_replace | Lead with principle, name consequence precisely |
+| Rewrite deploy skew paragraph | Direct str_replace | Cleaner construction, observability detail integrated |
+| Rewrite Cloudflare step naming paragraph | Direct str_replace | Neutral framing, adds naming collision observation |
+| Merge and reorder scaling paragraph | Direct str_replace | Cloudflare first for balance; determinism constraint preserved |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r11.md. Previous refinement preserved at drafts/run_60e780d58ab9-r10.md.

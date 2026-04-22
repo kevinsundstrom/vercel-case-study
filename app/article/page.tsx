@@ -14,7 +14,7 @@ export const metadata = {
 const TITLE = 'The architecture of resilient agents';
 
 async function getArticleHtml(): Promise<string> {
-  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r10.md');
+  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r11.md');
   const raw = readFileSync(filePath, 'utf8');
   const withoutTitle = raw.replace(/^#\s+.+\n/, '');
 
