@@ -417,3 +417,23 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r9.md. Previous refinement preserved at drafts/run_60e780d58ab9-r8.md.
+
+---
+
+## Iteration 12 — rewrite opening of Vercel refactoring paragraph
+
+### Problem observed
+
+The paragraph opened with "Refactoring is where..." — a construction that buried Vercel as the subject. Readers need the platform named to orient themselves. The sentence also described the mechanism without naming the consequence.
+
+### Change made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Rewrite opening three sentences of Vercel refactoring paragraph | Direct str_replace | Leads with Vercel as subject; names consequence (decoupling from historical state) not just mechanism |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r10.md. Previous refinement preserved at drafts/run_60e780d58ab9-r9.md.
