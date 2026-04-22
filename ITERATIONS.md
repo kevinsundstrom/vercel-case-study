@@ -516,3 +516,26 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r13.md. Previous refinement preserved at drafts/run_60e780d58ab9-r12.md.
+
+---
+
+## Iteration 16 — expand "Where state lives" and sharpen section 6 closing
+
+### Problems observed in iteration 15 draft
+
+1. **"The tradeoff is Vercel's portability versus Cloudflare's edge-local state" was too compressed.** The balance line named the tradeoff but didn't explain what platform coupling actually means for a team over time. The addition unpacks the consequence concretely.
+
+2. **Section 6 closing framed the choice as willingness rather than ownership.** "How much platform you are willing to adopt" is vague. "How much of your infrastructure stack you want a single platform to own" is more precise. The replacement also adds the key insight that the workflow layer can outlive the deployment layer on Vercel, and that Cloudflare's integration is an architectural reality, not a deficiency.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Drop balance line in "Where state lives"; add four-sentence expansion | Direct str_replace | Concrete consequence replaces compressed summary; "tightly" corrected from "permanently" |
+| Replace section 6 closing paragraph | Direct str_replace | Sharper framing, portability insight, em dash fixed to period |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r14.md. Previous refinement preserved at drafts/run_60e780d58ab9-r13.md.
