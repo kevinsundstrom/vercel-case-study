@@ -73,8 +73,9 @@ export default async function ArticlePage() {
         </h1>
 
         {/* Author */}
-        <div className="mb-8 flex items-center justify-center text-[14px] font-medium text-[#ededed]">
+        <div className="mb-8 flex items-center justify-center gap-2 text-[14px] font-medium text-[#ededed]">
           <span>Kevin Sundstrom</span>
+          <span className="font-normal text-[#666]">Content Engineer</span>
         </div>
 
         {/* Meta row */}
