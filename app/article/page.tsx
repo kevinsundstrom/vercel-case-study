@@ -40,7 +40,7 @@ export default async function ArticlePage() {
         rel="noopener noreferrer"
         className="fixed left-6 top-5 text-[13px] text-[#444] transition-colors hover:text-[#888]"
       >
-        GitHub
+        Repository
       </a>
 
       <style>{`
@@ -113,7 +113,7 @@ export default async function ArticlePage() {
               rel="noopener noreferrer"
               className="inline-block text-[14px] text-[oklch(0.717_0.1648_250.794)] underline underline-offset-[3px] decoration-[oklch(0.717_0.1648_250.794)] transition-opacity hover:opacity-80"
             >
-              See how it was built on GitHub →
+              View the repository →
             </a>
           </div>
         </div>
