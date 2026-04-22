@@ -294,3 +294,60 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r5.md. Previous refinement preserved at drafts/run_60e780d58ab9-r4.md.
+
+---
+
+## Iteration 8 — title, sections 4–7 substantive rework
+
+### Problems observed in iteration 7 draft
+
+1. **Title was descriptive, not argumentative.** "Two mental models for AI agents" describes the article but does not state the argument. The piece is fundamentally about a programming model (Vercel's directive approach) versus a new platform primitive (Cloudflare's Durable Object). The subtitle should name the distinction.
+
+2. **Streaming sentence named a Vercel feature rather than explaining the mechanism.** "Vercel's durable streams" is a product name. "Because state lives in the event log" is the reason the capability exists. The mechanism is more durable than the brand name.
+
+3. **Tradeoff sentence was anonymous.** "Portability versus edge-local state" was accurate but lost the platform attribution. Named tradeoffs are clearer.
+
+4. **Section 5 heading described rather than argued.** "Where each system gets harder" was blunt. "Design decisions with downstream consequences" names what the section is actually about.
+
+5. **Vercel refactoring paragraph hedged rather than explained.** "Whether that holds across all real-world refactor patterns is something each team needs to evaluate" is throat-clearing that avoids stating what actually happens. The new version explains the mechanism concretely and notes the observability impact.
+
+6. **"This problem" in Cloudflare sentence was redundant.** The surrounding context makes the referent clear.
+
+7. **"No I/O outside of steps" understated the constraint.** "Side effects" is broader and more accurate — covers non-deterministic operations beyond pure I/O.
+
+8. **Section 6 heading was neutral.** "How to think about the choice" is a generic frame. "The decision is architectural before it is technical" carries the argument.
+
+9. **Section 6 framing was conditional rather than architectural.** "If the agent is part of your application" and "if the workflow is a system of its own" frame the choice as a deployment question. The real distinction is whether you want orchestration inseparable from your application code or explicit alongside it. The new version names this directly and explains what "explicit" means concretely for Cloudflare.
+
+10. **Section 7 heading was atmospheric.** "The landscape has shifted" describes a mood, not a claim. "Durable execution is now the floor, not the feature" makes an argument.
+
+11. **Section 7 closing body leaned on metaphor.** "One hands you the reins. The other lets them disappear into your code" was carefully chosen in iteration 5 but the new version is more direct. "One makes the machinery visible. The other makes it disappear" is a cleaner parallel with no mixed metaphor risk.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Update title | Direct str_replace | Subtitle now names the architectural distinction being argued |
+| Reframe streaming sentence | Direct str_replace | Mechanism over product name |
+| Anchor tradeoff sentence with platform names | Direct str_replace | Named tradeoffs are clearer |
+| Rename section 5 heading | Direct str_replace | Argumentative heading |
+| Rewrite Vercel refactoring paragraph | Direct str_replace | Concrete explanation replaces hedge; adds observability detail |
+| Remove "problem" from Cloudflare sentence | Direct str_replace | Redundant given context |
+| "side effects" instead of "I/O" | Direct str_replace | More accurate constraint description |
+| Rename section 6 heading | Direct str_replace | Argumentative heading carries the claim |
+| Rewrite section 6 first paragraph; reframe second | Direct str_replace | Inside vs. alongside framing; explains Cloudflare explicitly |
+| Rename section 7 heading | Direct str_replace | Claim not atmosphere |
+| Rewrite section 7 body | Direct str_replace | Cleaner parallel replaces reins metaphor |
+
+### Anticipated improvement
+
+- Title signals the architectural argument immediately
+- Sections 5 and 6 are more substantive — explain mechanisms rather than describing choices at a high level
+- Section 7 closes with a direct parallel instead of a metaphor
+- Platform names anchor the tradeoffs throughout
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r6.md. Previous refinement preserved at drafts/run_60e780d58ab9-r5.md.
