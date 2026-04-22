@@ -34,6 +34,15 @@ export default async function ArticlePage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <a
+        href="https://github.com/kevinsundstrom/vercel-case-study"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed left-6 top-5 text-[13px] text-[#444] transition-colors hover:text-[#888]"
+      >
+        GitHub
+      </a>
+
       <style>{`
         /* Prism token colors matched from Vercel blog */
         .token.keyword,
@@ -64,7 +73,7 @@ export default async function ArticlePage() {
         </h1>
 
         {/* Byline */}
-        <div className="mb-10 flex items-center gap-2 text-[13px] text-[#666]">
+        <div className="mb-10 flex items-center justify-center gap-2 text-[13px] text-[#666]">
           <span>Kevin Sundstrom</span>
           <span>·</span>
           <span>April 21, 2026</span>
