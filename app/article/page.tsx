@@ -14,7 +14,7 @@ export const metadata = {
 const TITLE = 'Vercel Workflows vs Cloudflare Workflows: a new programming model vs a new primitive';
 
 async function getArticleHtml(): Promise<string> {
-  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r6.md');
+  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r7.md');
   const raw = readFileSync(filePath, 'utf8');
   const withoutTitle = raw.replace(/^#\s+.+\n/, '');
 

@@ -351,3 +351,23 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r6.md. Previous refinement preserved at drafts/run_60e780d58ab9-r5.md.
+
+---
+
+## Iteration 9 — remove redundant sentence in section 2
+
+### Problem observed
+
+"Under the hood, they share the same recovery mechanism" repeated what the section opening already established: "Both engines use the same fundamental recovery mechanism." The repeat added no information and slowed the pivot to the key point.
+
+### Change made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Remove redundant sentence in section 2 | Direct str_replace | Section opening covers it; removal tightens the Temporal → execution model transition |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r7.md. Previous refinement preserved at drafts/run_60e780d58ab9-r6.md.
