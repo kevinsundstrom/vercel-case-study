@@ -101,6 +101,22 @@ export default async function ArticlePage() {
           "
           dangerouslySetInnerHTML={{ __html: html }}
         />
+
+        <div className="mt-16">
+          <div className="border-t border-[#1a1a1a] pt-10 text-center">
+            <p className="mb-4 text-[15px] text-[#666]">
+              This article was produced by a claim-governed content pipeline built on Vercel Workflows.
+            </p>
+            <a
+              href="https://github.com/kevinsundstrom/vercel-case-study"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[14px] text-[oklch(0.717_0.1648_250.794)] underline underline-offset-[3px] decoration-[oklch(0.717_0.1648_250.794)] transition-opacity hover:opacity-80"
+            >
+              See how it was built on GitHub →
+            </a>
+          </div>
+        </div>
       </main>
     </div>
   );
