@@ -397,3 +397,23 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r8.md. Previous refinement preserved at drafts/run_60e780d58ab9-r7.md.
+
+---
+
+## Iteration 11 — rename section 1 heading
+
+### Problem observed
+
+"Same recovery mechanism, different expression" promised a contrast the section does not deliver. The section covers only the shared recovery mechanic. The contrast is earned in the sections that follow. The heading oversold what was in the section.
+
+### Change made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Rename section 1 heading to "The mechanics of recovery" | Direct str_replace | Accurate to section content; contrast arrives when the piece has earned it |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r9.md. Previous refinement preserved at drafts/run_60e780d58ab9-r8.md.
