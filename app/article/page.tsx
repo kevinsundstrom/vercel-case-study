@@ -94,7 +94,7 @@ export default async function ArticlePage() {
             [&_code]:font-[family-name:var(--font-geist-mono)] [&_code]:text-[#ededed] [&_code]:bg-[#161616] [&_code]:px-[5px] [&_code]:py-[2px] [&_code]:rounded [&_code]:text-[13px] [&_code]:before:content-none [&_code]:after:content-none
             [&_pre]:bg-[#111] [&_pre]:border [&_pre]:border-[#222] [&_pre]:rounded-xl [&_pre]:p-5 [&_pre]:overflow-x-auto [&_pre]:my-6
             [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-[#ededed] [&_pre_code]:text-[13px] [&_pre_code]:leading-[20px] [&_pre_code]:font-variant-ligatures-none
-            [&_hr]:border-[#1a1a1a] [&_hr]:my-10
+            [&_hr]:hidden
             [&_li]:text-[#ededed] [&_li]:text-[18px] [&_li]:leading-[28px]
             [&_blockquote]:border-l-[#333] [&_blockquote]:text-[#999]
             [&_table]:text-[14px] [&_th]:text-[#ededed] [&_th]:font-semibold [&_td]:text-[#ededed] [&_th]:border-[#222] [&_td]:border-[#1a1a1a]
