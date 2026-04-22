@@ -57,20 +57,20 @@ export default async function ArticlePage() {
         .token.plain-text { color: rgb(237, 237, 237); }
       `}</style>
 
-      <main className="mx-auto max-w-[720px] px-6 pb-32 pt-20">
+      <main className="mx-auto max-w-[720px] px-6 pb-32 pt-14">
+        {/* Title */}
+        <h1 className="mb-4 font-[family-name:var(--font-geist-sans)] text-[2.5rem] font-bold leading-[1.15] tracking-[-0.03em] text-[#ededed]">
+          {TITLE}
+        </h1>
+
         {/* Byline */}
-        <div className="mb-8 flex items-center gap-2 text-[13px] text-[#666]">
+        <div className="mb-10 flex items-center gap-2 text-[13px] text-[#666]">
           <span>Kevin Sundstrom</span>
           <span>·</span>
           <span>April 21, 2026</span>
           <span>·</span>
           <span>8 min read</span>
         </div>
-
-        {/* Title */}
-        <h1 className="mb-10 font-[family-name:var(--font-geist-sans)] text-[2.5rem] font-bold leading-[1.15] tracking-[-0.03em] text-[#ededed]">
-          {TITLE}
-        </h1>
 
         {/* Body */}
         <article
