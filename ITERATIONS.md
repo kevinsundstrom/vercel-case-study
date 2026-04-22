@@ -493,3 +493,26 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r12.md. Previous refinement preserved at drafts/run_60e780d58ab9-r11.md.
+
+---
+
+## Iteration 15 — rewrite closing body
+
+### Problems observed in iteration 14 draft
+
+1. **"Should be invisible" took a side.** The prescriptive framing subtly privileged Vercel's approach. A comparison piece should land the reader at a decision point, not advocate for one model.
+
+2. **Last sentence framed the choice as cognitive load.** "How much infrastructure you want to think about" is vaguer than "how explicitly you want to manage" — the latter names the actual distinction between the two approaches.
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| Replace prescriptive claim with question | Direct str_replace | Neutral framing for a comparison piece; reader answers rather than author |
+| "How explicitly you want to manage" | Direct str_replace | More precise than "how much you want to think about" |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r13.md. Previous refinement preserved at drafts/run_60e780d58ab9-r12.md.
