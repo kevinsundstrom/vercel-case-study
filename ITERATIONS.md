@@ -371,3 +371,29 @@ n/a — direct apply
 
 ### Versioning
 Refinement saved as drafts/run_60e780d58ab9-r7.md. Previous refinement preserved at drafts/run_60e780d58ab9-r6.md.
+
+---
+
+## Iteration 10 — new title, new lede, cut redundant opening sentence
+
+### Problems observed in iteration 9 draft
+
+1. **Title named the platforms rather than the argument.** "Vercel Workflows vs Cloudflare Workflows: a new programming model vs a new primitive" is accurate but front-loads the brand comparison. The piece makes an architectural argument; the title should reflect that.
+
+2. **Lede read as marketing.** "Production agents need durable execution" is a declarative sell. The replacement opens with an observation ("where LLM calls fail and workflows hang") and orients with a description rather than a claim.
+
+3. **Opening paragraph's first sentence was redundant with the new lede.** "Building an AI agent that actually finishes what it starts is harder than it looks" restated what the lede already established. Cutting it lets the paragraph open directly at "LLM calls are slow."
+
+### Changes made
+
+| Change | Mechanism | Rationale |
+|---|---|---|
+| New title: "The architecture of resilient agents" | Direct str_replace | Frames the architectural argument, drops brand comparison from title |
+| New lede | page.tsx | Observational hook + descriptive orientation replaces marketing-adjacent claim |
+| Cut opening sentence from first paragraph | Direct str_replace | Redundant with lede; paragraph is stronger starting at "LLM calls are slow" |
+
+### Run ID
+n/a — direct apply
+
+### Versioning
+Refinement saved as drafts/run_60e780d58ab9-r8.md. Previous refinement preserved at drafts/run_60e780d58ab9-r7.md.

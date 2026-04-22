@@ -8,13 +8,13 @@ import rehypePrism from 'rehype-prism-plus';
 import rehypeStringify from 'rehype-stringify';
 
 export const metadata = {
-  title: 'Vercel Workflows vs Cloudflare Workflows: a new programming model vs a new primitive',
+  title: 'The architecture of resilient agents',
 };
 
-const TITLE = 'Vercel Workflows vs Cloudflare Workflows: a new programming model vs a new primitive';
+const TITLE = 'The architecture of resilient agents';
 
 async function getArticleHtml(): Promise<string> {
-  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r7.md');
+  const filePath = join(process.cwd(), 'drafts', 'run_60e780d58ab9-r8.md');
   const raw = readFileSync(filePath, 'utf8');
   const withoutTitle = raw.replace(/^#\s+.+\n/, '');
 
@@ -94,7 +94,7 @@ export default async function ArticlePage() {
           style={{ fontFeatureSettings: '"liga"', fontSynthesisWeight: 'none', WebkitFontSmoothing: 'antialiased', textRendering: 'optimizeLegibility' }}
           className="mb-0 font-[family-name:var(--font-geist-sans)] text-[24px] font-medium leading-[36px] tracking-[-0.96px] text-[rgb(161,161,161)] py-6"
         >
-          Production agents need durable execution. These two platforms put it in different places.
+          Building for the real world where LLM calls fail and workflows hang. A comparison of how Vercel and Cloudflare approach agent durability.
         </p>
 
         {/* Body */}
