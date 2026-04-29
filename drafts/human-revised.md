@@ -1,6 +1,6 @@
 # Durable execution for long-lived agents
 
-Long-running agents fail for many reasons. Networks drop, tools time out, LLM calls don't complete. A multi-step agent that runs for minutes or hours needs a way to pick up where it left off when something goes wrong. Without durable execution, any failure ends the run permanently, which makes autonomous operation impossible in practice.
+Long-running agents fail in predictable ways: networks drop, tools time out, LLM calls don't complete. A multi-step agent that runs for minutes or hours needs a recovery path when something goes wrong. Without durable execution, any failure ends the run permanently, which undermines the value of running them autonomously.
 
 Both Vercel and Cloudflare have built durable execution into their platforms. Developers no longer have to reach for a separate orchestration service to get it. But the two implementations take different approaches to where durability lives.
 
