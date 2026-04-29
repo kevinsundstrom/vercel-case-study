@@ -89,9 +89,9 @@ Cloudflare's co-located state reduces read/write latency between compute and sta
 
 ## Visibility and portability shape the decision
 
-The first question is visibility. Do you want orchestration to disappear into your application code, or remain an explicit architectural boundary? Vercel makes it invisible. Directives extend your existing async functions without a separate entrypoint, a separate class, or a separate configuration file. Cloudflare's model is explicit by design. It asks for a dedicated class, a named binding, and a configuration that makes the workflow an explicit architectural boundary.
+The choice starts with visibility. Do you want orchestration to disappear into your application code, or remain an explicit architectural boundary? Vercel makes it invisible. Directives extend your existing async functions without a separate entrypoint, a separate class, or a separate configuration file. Cloudflare's model is explicit by design with a dedicated class, a named binding, and a separate configuration file.
 
-The second question is whether your workflow layer needs to be portable independent of your deployment platform. Vercel's open-source SDK and pluggable storage mean the workflow layer can outlive the deployment layer. Cloudflare's model doesn't offer that separation, and it doesn't pretend to. If you're already deep in the Workers ecosystem, that's not a constraint. It's just the architecture. If you're not, it's the first thing to pressure-test before you commit to the platform.
+Portability is the second consideration. Vercel's open-source SDK and pluggable storage mean the workflow layer can outlive the deployment layer. Cloudflare's model doesn't offer that separation, and it doesn't pretend to. If you're already deep in the Workers ecosystem, that's not a constraint. It's just the architecture. If you're not, it's the first thing to pressure-test before you commit.
 
 ---
 
