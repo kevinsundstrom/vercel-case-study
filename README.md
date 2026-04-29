@@ -6,7 +6,7 @@ The assignment was to build a lightweight agent and use it to produce a comparis
 
 I built the pipeline on Vercel Workflows. Three reasons:
 
-- **Reliability.** Multi-step LLM pipelines fail. This needed to be durable.
+- **Reliability.** Multi-step LLM pipelines fail. This needed to just work.
 - **First-hand experience.** You write a better comparison after building on one of the platforms.
 - **The work documents itself.** Every pipeline run is a versioned draft. Every iteration is logged.
 
