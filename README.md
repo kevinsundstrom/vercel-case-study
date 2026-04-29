@@ -34,11 +34,10 @@ flowchart TB
     end
     subgraph bottom[ ]
         direction LR
-        F[Lint] -->|Pass| G[Save to GitHub]
-        F -->|Fail, up to 3x| H[Repair]
-        H --> F
+        H[Repair] --> F[Lint] -->|Pass| G[Save to GitHub]
     end
     E --> F
+    F -->|Fail, up to 3x| H
 
     style top fill:none,stroke:none
     style bottom fill:none,stroke:none
