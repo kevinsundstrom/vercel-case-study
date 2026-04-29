@@ -1,8 +1,14 @@
 # Vercel case study
 
-The assignment was to build a lightweight agent and use it to produce a comparison piece on Vercel Workflows and Cloudflare Workflows. Show your work.
+The assignment was to build a lightweight agent and use it to produce a comparison piece on Vercel Workflows and Cloudflare Workflows. The timeline was tight.
 
-I built the pipeline on Vercel Workflows — for the reliability, for the first-hand experience, and because building this way documents the work by default. Every run is a versioned draft. Every iteration is logged.
+## Built on Vercel Workflows
+
+I built the pipeline on Vercel Workflows. Three reasons:
+
+- **Reliability.** Multi-step LLM pipelines fail. This needed to be durable.
+- **First-hand experience.** You write a better comparison after building on one of the platforms.
+- **The work documents itself.** Every pipeline run is a versioned draft. Every iteration is logged.
 
 The refine endpoint is a plain API route, not a workflow. A single LLM call that completes in seconds doesn't need durable execution. The choice reflects the argument the article makes.
 
