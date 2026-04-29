@@ -4,6 +4,10 @@ Long-running agents fail for many reasons. Networks drop, tools time out, LLM ca
 
 Both Vercel and Cloudflare have built durable execution into their platforms. Developers no longer have to reach for a separate orchestration service to get it. But the two implementations take different approaches to where durability lives.
 
+---
+
+## The mechanics of recovery
+
 Both platforms use the same recovery mechanism. When a workflow resumes after a failure or a long wait, it re-executes from the top, but completed steps are skipped. The runtime checks a persistent store for a cached result and moves on if it finds one.
 
 [Temporal](https://temporal.io) pioneered this pattern, sometimes called replay-with-memoization, and it is now the dominant approach in code-first durable execution.
