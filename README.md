@@ -28,13 +28,14 @@ An outline-driven content pipeline deployed on Vercel using Vercel Workflows for
 
 ```mermaid
 flowchart LR
-    A[Trigger] --> B[Research] --> C[Write] --> D[Check] --> E[Fix facts]
+    A[Trigger] --> B[Research] --> C[Write] --> D[Check] --> E[Fix facts] --> P[ ]
+    style P fill:none,stroke:none,color:none
 ```
 
 Output then passes to the lint loop:
 
 ```mermaid
-flowchart LR
+flowchart TD
     F[Lint] -->|Pass| G[Save to GitHub]
     F -->|Fail, up to 3x| H[Repair]
     H --> F
