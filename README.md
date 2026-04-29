@@ -28,19 +28,10 @@ An outline-driven content pipeline deployed on Vercel using Vercel Workflows for
 
 ```mermaid
 flowchart LR
-    subgraph top[ ]
-        direction LR
-        A[Trigger] --> B[Research] --> C[Write] --> D[Fact check] --> E[Fact repair]
-    end
-    subgraph bottom[ ]
-        direction LR
-        H[Repair] --> F[Lint] -->|Pass| G[Save to GitHub]
-    end
+    A[Trigger] --> B[Research] --> C[Write] --> D[Fact check] --> E[Fact repair]
+    H[Repair] --> F[Lint] -->|Pass| G[Save to GitHub]
     E --> F
     F -->|Fail, up to 3x| H
-
-    style top fill:none,stroke:none
-    style bottom fill:none,stroke:none
 ```
 
 **Agents:**
