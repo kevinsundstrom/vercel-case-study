@@ -39,6 +39,7 @@ flowchart TD
     F[Lint] -->|Pass| G[Save to GitHub]
     F -->|Fail, up to 3x| H[Repair]
     H --> F
+    G ~~~ H
 ```
 
 **Agents:**
