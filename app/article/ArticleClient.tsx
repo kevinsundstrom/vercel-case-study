@@ -12,8 +12,7 @@ export default function ArticleClient({ humanHtml, aiHtml }: ArticleClientProps)
 
   return (
     <>
-      <div className="flex items-center justify-end mb-6">
-        <div className="flex items-center gap-1 rounded-full border border-[#222] bg-[#111] p-1 text-[13px]">
+      <div className="fixed right-6 top-5 hidden md:flex items-center gap-1 rounded-full border border-[#222] bg-[#111] p-1 text-[13px]">
           <button
             onClick={() => setShowAi(false)}
             className={`rounded-full px-3 py-1 transition-colors ${
@@ -30,7 +29,6 @@ export default function ArticleClient({ humanHtml, aiHtml }: ArticleClientProps)
           >
             AI draft
           </button>
-        </div>
       </div>
 
       <article
