@@ -87,7 +87,7 @@ Cloudflare's co-located state reduces read/write latency between compute and sta
 
 ---
 
-## The decision is architectural before it is technical
+## Visibility and portability shape the decision
 
 The first question is visibility. Do you want orchestration to disappear into your application code, or remain an explicit architectural boundary? Vercel makes it invisible. Directives extend your existing async functions without a separate entrypoint, a separate class, or a separate configuration file. Cloudflare's model is explicit by design. It asks for a dedicated class, a named binding, and a configuration that makes the workflow an explicit architectural boundary.
 
