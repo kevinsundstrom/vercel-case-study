@@ -24,7 +24,18 @@ An outline-driven content pipeline deployed on Vercel using Vercel Workflows for
 
 **Tech stack:** Next.js App Router, Vercel Workflow DevKit, Anthropic SDK, GitHub Contents API
 
-**Pipeline stages:** trigger → research → write → fact check → fact repair → lint loop (up to 3 passes) → save to GitHub
+**Pipeline stages:**
+
+```mermaid
+flowchart LR
+    A[Trigger] --> B[Research]
+    B --> C[Write]
+    C --> D[Fact check]
+    D --> E[Fact repair]
+    E --> F[Lint]
+    F -->|Pass| G[Save to GitHub]
+    F -->|Fail, up to 3x| E
+```
 
 **Agents:**
 
