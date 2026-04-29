@@ -9,10 +9,10 @@ import rehypeStringify from 'rehype-stringify';
 import ArticleClient from './ArticleClient';
 
 export const metadata = {
-  title: 'Durable execution for long-lived agents',
+  title: 'Durable execution for long-running agents',
 };
 
-const TITLE = 'Durable execution for long-lived agents';
+const TITLE = 'Durable execution for long-running agents';
 
 async function mdToHtml(filePath: string): Promise<string> {
   const raw = readFileSync(filePath, 'utf8');

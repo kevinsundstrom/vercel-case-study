@@ -1,4 +1,4 @@
-# Durable execution for long-lived agents
+# Durable execution for long-running agents
 
 Long-running agents fail in predictable ways: networks drop, tools time out, LLM calls don't complete. A multi-step agent that runs for minutes or hours needs a recovery path when something goes wrong. Without durable execution, any failure ends the run permanently, which undermines the value of autonomous agents.
 
