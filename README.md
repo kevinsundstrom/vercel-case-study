@@ -18,6 +18,8 @@ The refine endpoint is a plain API route, not a workflow. A single LLM call that
 
 The piece examines how Vercel and Cloudflare have each built durable execution into their platforms, why the two implementations differ at the architectural level, and what that means for developers building AI agents on top of them.
 
+The live article defaults to the edited version. A toggle on the page lets you compare it against the raw pipeline output.
+
 ## What was built
 
 An outline-driven content pipeline deployed on Vercel using Vercel Workflows for durable execution. You POST an outline, the pipeline runs, and a finished markdown draft is committed to the repo.
