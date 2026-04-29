@@ -27,14 +27,21 @@ An outline-driven content pipeline deployed on Vercel using Vercel Workflows for
 **Pipeline stages:**
 
 ```mermaid
-flowchart LR
-    A[Trigger] --> B[Research]
-    B --> C[Write]
-    C --> D[Fact check]
-    D --> E[Fact repair]
-    E --> F[Lint]
-    F -->|Pass| G[Save to GitHub]
-    F -->|Fail, up to 3x| E
+flowchart TB
+    subgraph top[ ]
+        direction LR
+        A[Trigger] --> B[Research] --> C[Write] --> D[Fact check] --> E[Fact repair]
+    end
+    subgraph bottom[ ]
+        direction LR
+        F[Lint] -->|Pass| G[Save to GitHub]
+        F -->|Fail, up to 3x| H[Repair]
+        H --> F
+    end
+    E --> F
+
+    style top fill:none,stroke:none
+    style bottom fill:none,stroke:none
 ```
 
 **Agents:**
