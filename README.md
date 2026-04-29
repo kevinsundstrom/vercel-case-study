@@ -1,6 +1,10 @@
 # Vercel case study
 
-This repo was built as a case study for a Content Engineer role at Vercel. The goal was to build a lightweight content pipeline and use it to produce an original piece comparing Vercel Workflows and Cloudflare Workflows as agent infrastructure.
+The assignment was to build a lightweight agent and use it to produce a comparison piece on Vercel Workflows and Cloudflare Workflows. Show your work.
+
+I built the pipeline on Vercel Workflows — for the reliability, for the first-hand experience, and because building this way documents the work by default. Every run is a versioned draft. Every iteration is logged.
+
+The refine endpoint is a plain API route, not a workflow. A single LLM call that completes in seconds doesn't need durable execution. The choice reflects the argument the article makes.
 
 ## The article
 
@@ -50,6 +54,3 @@ drafts/                      — all draft outputs, versioned by run ID and refi
 ITERATIONS.md                — full iteration log: problems observed, changes made, reasoning
 ```
 
-## A note on the pipeline running on Vercel Workflows
-
-The pipeline is built on the technology it writes about. Each stage is a named step that is cached and retryable. If a step fails, the workflow resumes from that step rather than starting over. The refine endpoint is a plain API route, not a workflow, because a single LLM call that completes in seconds does not need durable execution. The choice of tool reflects the architectural argument the article makes.
