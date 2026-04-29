@@ -9,10 +9,10 @@ import rehypeStringify from 'rehype-stringify';
 import ArticleClient from './ArticleClient';
 
 export const metadata = {
-  title: 'The architecture of resilient agents',
+  title: 'Durable execution for long-lived agents',
 };
 
-const TITLE = 'The architecture of resilient agents';
+const TITLE = 'Durable execution for long-lived agents';
 
 async function mdToHtml(filePath: string): Promise<string> {
   const raw = readFileSync(filePath, 'utf8');
@@ -91,7 +91,7 @@ export default async function ArticlePage() {
           style={{ fontFeatureSettings: '"liga"', fontSynthesisWeight: 'none', WebkitFontSmoothing: 'antialiased', textRendering: 'optimizeLegibility' }}
           className="mb-0 font-[family-name:var(--font-geist-sans)] text-[24px] font-medium leading-[36px] tracking-[-0.96px] text-[rgb(161,161,161)] py-6"
         >
-          Building for the real world where LLM calls fail and workflows hang. A comparison of how Vercel and Cloudflare approach agent durability.
+          Comparing Vercel Workflows and Cloudflare Workflows for running reliable, observable agents.
         </p>
 
         <ArticleClient humanHtml={humanHtml} aiHtml={aiHtml} />

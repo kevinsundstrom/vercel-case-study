@@ -1,4 +1,4 @@
-# The architecture of resilient agents
+# Durable execution for long-lived agents
 
 Long-running agents fail for many reasons. Networks drop, tools time out, LLM calls don't complete. A multi-step agent that runs for minutes or hours needs a way to pick up where it left off when something goes wrong. Without durable execution, any failure ends the run permanently, which makes autonomous operation impossible in practice.
 
@@ -75,7 +75,7 @@ A team that starts on Cloudflare for the edge-local performance benefit is also 
 
 ---
 
-## Design decisions and trade-offs
+## Step identity, scaling, and determinism
 
 Vercel's use of inferred IDs means code structure and execution state are linked. Each step gets an ID generated from its filepath and function name. If you rename a file or move a function, the compiler generates new IDs, which creates new step identities in the updated deployment.
 
@@ -95,6 +95,6 @@ The second question is whether your workflow layer needs to be portable independ
 
 ---
 
-## Durable execution is now the floor, not the feature
+## The architectural decision
 
-Durable execution used to be infrastructure you bolted on. Both Vercel and Cloudflare have moved it inside the platform, but they have made different decisions about where it belongs. The question isn't which system handles more. It's how explicitly you want to manage that infrastructure while you're building.
+Durable execution used to be infrastructure you bolted on. Both Vercel and Cloudflare have moved it inside the platform and treat it as baseline. The decision now is architectural: how explicitly you want to manage that infrastructure while you build.
