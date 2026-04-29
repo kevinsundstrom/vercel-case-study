@@ -68,7 +68,7 @@ export default async function ArticlePage() {
       `}</style>
 
       <main className="mx-auto max-w-[720px] px-6 pb-32 pt-14">
-        <h1 className="mb-4 text-center font-[family-name:var(--font-geist-sans)] text-[2.5rem] font-bold leading-[1.15] tracking-[-0.03em] text-[#ededed]">
+        <h1 className="mb-4 text-balance text-center font-[family-name:var(--font-geist-sans)] text-[2.5rem] font-bold leading-[1.15] tracking-[-0.03em] text-[#ededed]">
           {TITLE}
         </h1>
 
