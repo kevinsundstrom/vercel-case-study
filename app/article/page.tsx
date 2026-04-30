@@ -19,7 +19,7 @@ async function mdToHtml(filePath: string): Promise<string> {
   const withoutTitle = raw.replace(/^#\s+.+\n/, '');
   const result = await unified()
     .use(remarkParse)
-    .use(remarkGfm, { autoLinkLiterals: false })
+    .use(remarkGfm, { autoLinkLiterals: false } as Parameters<typeof remarkGfm>[0])
     .use(remarkRehype)
     .use(rehypePrism)
     .use(rehypeStringify)
