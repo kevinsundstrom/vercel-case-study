@@ -23,6 +23,11 @@ Vercel Workflows makes durability a language-level concept, not a system you int
 Here is what a two-step research agent looks like in Vercel using only directives.
 
 ```typescript
+type Source = {
+  url: string;
+  content: string;
+};
+
 async function runResearchAgent(query: string) {
   "use workflow";
   const sources = await fetchSources(query);
