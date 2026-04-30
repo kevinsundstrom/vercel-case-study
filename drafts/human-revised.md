@@ -35,7 +35,7 @@ async function runResearchAgent(query: string) {
   return summary;
 }
 
-async function fetchSources(query: string) {
+async function fetchSources(query: string): Promise<Source[]> {
   "use step";
   // calls external APIs, searches the web
 }
