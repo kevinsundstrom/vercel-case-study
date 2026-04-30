@@ -79,9 +79,9 @@ If you start on Cloudflare for the edge-local performance benefit, your workflow
 
 ## Step identity, scaling, and determinism
 
-Vercel's use of inferred IDs means code structure and execution state are linked. Each step gets an ID generated from its filepath and function name. If you rename a file or move a function, the compiler generates new IDs, which creates new step identities in the updated deployment.
+Vercel's use of inferred IDs means code structure and execution state are linked. Each step gets an ID derived from its position in the code. If you rename a file or move a function, the compiler generates new IDs, which creates new step identities in the updated deployment.
 
-Vercel solves this through deploy skew protection: in-flight runs are pinned to the deployment they started on, while new runs pick up the latest code. It means in-flight tasks cannot be upgraded to new logic mid-flight, and renamed steps will appear under different names in observability across the two deployments.
+Vercel solves this through deploy skew protection: in-flight runs are pinned to the deployment they started on, while new runs pick up the latest code. It means in-flight tasks cannot be upgraded to new logic mid-flight, and executions in the updated deployment may appear differently in observability.
 
 Cloudflare requires explicit step names. Because you supply the cache key as a string, you can move code anywhere without breaking identity. The tradeoff is manual overhead: you are responsible for maintaining unique keys across your codebase, and the compiler won't catch a naming collision.
 
