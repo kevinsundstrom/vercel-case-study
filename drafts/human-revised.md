@@ -27,6 +27,7 @@ type Source = {
   url: string;
   content: string;
 };
+type Summary = string;
 
 async function runResearchAgent(query: string) {
   "use workflow";
@@ -40,7 +41,7 @@ async function fetchSources(query: string): Promise<Source[]> {
   // calls external APIs, searches the web
 }
 
-async function synthesizeFindings(sources: Source[]) {
+async function synthesizeFindings(sources: Source[]): Promise<Summary> {
   "use step";
   // calls LLM to summarize and reason over sources
 }
