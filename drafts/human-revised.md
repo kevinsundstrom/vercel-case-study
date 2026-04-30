@@ -27,21 +27,17 @@ type Source = {
   url: string;
   content: string;
 };
-type Summary = string;
-
 async function runResearchAgent(query: string) {
   "use workflow";
   const sources = await fetchSources(query);
   const summary = await synthesizeFindings(sources);
   return summary;
 }
-
 async function fetchSources(query: string): Promise<Source[]> {
   "use step";
   // calls external APIs, searches the web
 }
-
-async function synthesizeFindings(sources: Source[]): Promise<Summary> {
+async function synthesizeFindings(sources: Source[]) {
   "use step";
   // calls LLM to summarize and reason over sources
 }
@@ -55,7 +51,6 @@ Here is the same research agent in Cloudflare, where steps are named explicitly 
 
 ```typescript
 import { WorkflowEntrypoint, WorkflowEvent, WorkflowStep } from "cloudflare:workers";
-
 export class ResearchAgentWorkflow extends WorkflowEntrypoint<Env, Params> {
   async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
     const sources = await step.do("fetch sources", async () => {
