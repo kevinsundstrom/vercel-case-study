@@ -2,7 +2,7 @@
 
 Long-running agents fail in predictable ways: networks drop, tools time out, LLM calls don't complete. A multi-step agent that runs for minutes or hours needs a recovery path when something goes wrong. Without durable execution, any failure ends the run permanently, which undermines the value of autonomous agents.
 
-Both Vercel and Cloudflare have built durable execution into their platforms. Developers no longer have to reach for a separate orchestration service to get it. But the two implementations take different approaches to where durability lives.
+Both Vercel and Cloudflare have built durable execution into their platforms. You no longer have to reach for a separate orchestration service to get it. But the two implementations take different approaches to where durability lives.
 
 ---
 
@@ -63,7 +63,7 @@ export class ResearchAgentWorkflow extends WorkflowEntrypoint<Env, Params> {
 }
 ```
 
-The step names are explicit strings supplied by the developer. The runtime does not infer them from the code structure.
+The step names are explicit strings you supply. The runtime does not infer them from the code structure.
 
 ---
 
@@ -73,7 +73,7 @@ Vercel stores workflow state in a managed event log. The storage layer is swappa
 
 Cloudflare stores workflow state in a SQLite database inside each workflow's Durable Object instance. State and compute are co-located at the edge. For agents that read and write accumulated state frequently, that co-location reduces the round-trip between compute and the data it acts on. Because of this architecture, there is no self-hosted path. Cloudflare Workflows runs on Cloudflare.
 
-A team that starts on Cloudflare for the edge-local performance benefit is also accepting that their workflow state, retry logic, and execution history are tightly coupled to the Workers runtime. For most teams building internal tooling or low-latency agents, that's a reasonable trade. For teams that need to move infrastructure or audit execution history outside the platform, it's a meaningful constraint to account for early.
+If you start on Cloudflare for the edge-local performance benefit, you're also accepting that your workflow state, retry logic, and execution history are tightly coupled to the Workers runtime. For most use cases, including internal tooling and low-latency agents, that's a reasonable trade. If you need to move infrastructure or audit execution history outside the platform, it's a meaningful constraint to account for early.
 
 ---
 
