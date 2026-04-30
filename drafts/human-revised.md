@@ -73,7 +73,7 @@ Vercel stores workflow state in a managed event log. The storage layer is swappa
 
 Cloudflare stores workflow state in a SQLite database inside each workflow's Durable Object instance. State and compute are co-located at the edge. For agents that read and write accumulated state frequently, that co-location reduces the round-trip between compute and the data it acts on. Because of this architecture, there is no self-hosted path. Cloudflare Workflows runs on Cloudflare.
 
-If you start on Cloudflare for the edge-local performance benefit, you're also accepting that your workflow state, retry logic, and execution history are tightly coupled to the Workers runtime. For most use cases, including internal tooling and low-latency agents, that's a reasonable trade. If you need to move infrastructure or audit execution history outside the platform, it's a meaningful constraint to account for early.
+If you start on Cloudflare for the edge-local performance benefit, your workflow state, retry logic, and execution history are tightly coupled to the Workers runtime. For most internal tooling and low-latency agent use cases, that's a reasonable trade. If you need to move infrastructure or audit execution history outside the platform, it's a meaningful constraint to account for early.
 
 ---
 
