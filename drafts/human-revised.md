@@ -48,6 +48,8 @@ With Cloudflare, durability is a property of a stateful primitive called a Durab
 Here is the same research agent in Cloudflare, where steps are named explicitly and the workflow is a class.
 
 ```typescript
+import { WorkflowEntrypoint, WorkflowEvent, WorkflowStep } from "cloudflare:workers";
+
 export class ResearchAgentWorkflow extends WorkflowEntrypoint<Env, Params> {
   async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
     const sources = await step.do("fetch sources", async () => {
